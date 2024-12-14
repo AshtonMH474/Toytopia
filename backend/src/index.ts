@@ -1,14 +1,14 @@
 import express from 'express'
-
+import { Request,Response } from 'express';
 const app = express();
 
 app.use(express.json())
 
-app.get('/', (req,res) => {
+app.get('/:id', (req:Request,res:Response) => {
     res.send('TEst!')
 })
 
-app.post('/',(req,res) => {
+app.post('/',(req:Request,res:Response) => {
     res.send({
         data:req.body
     })
