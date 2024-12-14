@@ -2,12 +2,19 @@ import express from 'express'
 
 const app = express();
 
+app.use(express.json())
 
 app.get('/', (req,res) => {
     res.send('TEst!')
 })
 
-const port:number = 8000
+app.post('/',(req,res) => {
+    res.send({
+        data:req.body
+    })
+})
+
+const port:number = 8001
 
 app.listen(port,() => {
     console.log(`Application running on port ${port}`)
