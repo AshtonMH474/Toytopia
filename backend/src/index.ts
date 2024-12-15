@@ -1,5 +1,5 @@
 import express from 'express'
-import db from './config/database.config'
+import { db } from './config/database.config';
 import { Request,Response } from 'express';
 const app = express();
 
