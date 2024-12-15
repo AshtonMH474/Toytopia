@@ -13,7 +13,7 @@ const environment = process.env.NODE_ENV || 'development';
 exports.sequelizeConfig = {
     environment,
     port: parseInt(process.env.PORT || '8000', 10),
-    dbFile: process.env.DB_FILE || './database.sqlite',
+    dbFile: process.env.DB_FILE || './db.sqlite',
     jwtConfig: {
         secret: process.env.JWT_SECRET || 'defaultsecret',
         expiresIn: process.env.JWT_EXPIRES_IN || '604800', // default 7 days in seconds
