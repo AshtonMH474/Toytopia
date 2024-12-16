@@ -1,20 +1,18 @@
 import express from 'express'
 import { db } from './config/database.config';
-import { sequelizeConfig } from './config/database.config';
+import config from './config';
 import { Request,Response } from 'express';
 const app = express();
 
-// db.sync().then(() => {
-//     console.log('connect to db')
-// })
+
 
 db.authenticate()
     .then(() => {
     console.log('Database connection success! Sequelize is ready to use...');
 
     // Start listening for connections
-    app.listen(sequelizeConfig.port, () => {
-        console.log(`Listening on port ${sequelizeConfig.port}...`);
+    app.listen(config.port, () => {
+        console.log(`Listening on port ${config.port}...`);
     });
     })
     .catch((err: Error) => {

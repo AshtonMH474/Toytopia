@@ -49,16 +49,15 @@ exports.seederStorageConfig = seederStorageConfig;
 // Initialize Sequelize based on the environment
 let db;
 if (environment === 'production') {
-    // Production environment: use DATABASE_URL from environment variable
     const databaseUrl = process.env.DATABASE_URL;
     if (databaseUrl) {
-        exports.db = db = new sequelize_1.Sequelize(databaseUrl, databaseConfig.production);
+        exports.db = db = new sequelize_1.Sequelize(databaseUrl, Object.assign(Object.assign({}, databaseConfig.production), seederStorageConfig));
     }
     else {
         throw new Error('DATABASE_URL is not defined in production environment');
     }
 }
 else {
-    // Development environment: use file-based SQLite database
     exports.db = db = new sequelize_1.Sequelize(databaseConfig.development);
 }
+// Export both the db instance and seederStorageConfig for use in seeders
