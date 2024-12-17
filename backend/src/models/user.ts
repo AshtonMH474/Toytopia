@@ -9,6 +9,7 @@ import validator from 'validator';
 
 
 interface UserAttributes {
+  id:number,
   firstName:string,
   lastName:string,
   email:string,
@@ -24,6 +25,7 @@ module.exports = (sequelize:any, DataTypes:any) => {
      * This method is not a part of Sequelize lifecycle.
      * The `models/index` file will call this method automatically.
      */
+    id!:number;
     firstName!: string;
     lastName!: string;
     username!: string;
@@ -39,6 +41,12 @@ module.exports = (sequelize:any, DataTypes:any) => {
     }
   }
   User.init({
+    id:{
+      type:DataTypes.INTEGER,
+      allowNull:false,
+      primaryKey:true,
+      autoIncrement:true
+    },
     firstName:{
      type:DataTypes.STRING,
      allowNull:false
