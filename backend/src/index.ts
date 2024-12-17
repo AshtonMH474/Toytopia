@@ -3,10 +3,14 @@ import { Request,Response } from 'express';
 require('dotenv').config();
 import {port} from './config'
 import db from './models';
+import {createUsers} from './seeders/users'
 
 const app = express();
 
 app.use(express.json())
+
+// seeds the users in db
+createUsers()
 
 db.sequelize
   .authenticate()
