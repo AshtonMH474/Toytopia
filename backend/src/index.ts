@@ -4,15 +4,14 @@ require('dotenv').config();
 import {port} from './config'
 import db from './models';
 import {createUsers} from './seeders/users'
+import { createToys } from './seeders/toys';
 
 const app = express();
 
 app.use(express.json())
 
-// seeds the users in db
-createUsers()
 
-db.sequelize
+ db.sequelize
   .authenticate()
   .then(() => {
     console.log('Database connection success!');
@@ -22,6 +21,16 @@ db.sequelize
   .then(() => {
     console.log('Database schema synchronized!');
 
+    try {
+        createUsers(); // Ensure this runs after sync
+        console.log('Users seeded successfully!');
+
+        createToys(); // Ensure this runs after users are seeded
+        console.log('Toys seeded successfully!');
+      } catch (err) {
+        console.error('Error during seeding:', err);
+      }
+
     // Start listening for connections
     app.listen(port, () => {
       console.log(`Application running on port ${port}`);
@@ -30,6 +39,9 @@ db.sequelize
   .catch((err:any) => {
     console.error('Error during database initialization:', err);
   });
+
+
+
 
 
 app.get('/:id', (req:Request,res:Response) => {

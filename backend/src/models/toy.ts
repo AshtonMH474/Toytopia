@@ -5,6 +5,7 @@ import {
 
 interface ToyAttributes{
   id:number,
+  name:string,
   productType:string,
   price:number,
   theme:string,
@@ -17,6 +18,7 @@ module.exports = (sequelize:any, DataTypes:any) => {
   class Toy extends Model<ToyAttributes>
   implements  ToyAttributes{
     id!:number;
+    name!:string;
     productType!:string;
     price!:number;
     theme!:string;
@@ -41,6 +43,10 @@ module.exports = (sequelize:any, DataTypes:any) => {
       allowNull:false,
       primaryKey:true,
       autoIncrement:true
+    },
+    name:{
+      type:DataTypes.STRING,
+      allowNull:false
     },
     productType:{
       type:DataTypes.STRING,
