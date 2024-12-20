@@ -22,10 +22,10 @@ app.use(express.json())
     console.log('Database schema synchronized!');
 
     try {
-        createUsers(); // Ensure this runs after sync
+        createUsers(); // seeds users
         console.log('Users seeded successfully!');
 
-        createToys(); // Ensure this runs after users are seeded
+        createToys(); // seeds toys
         console.log('Toys seeded successfully!');
       } catch (err) {
         console.error('Error during seeding:', err);

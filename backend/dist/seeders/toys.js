@@ -1,4 +1,10 @@
-import db from '../models';
+"use strict";
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+exports.createToys = void 0;
+const models_1 = __importDefault(require("../models"));
 const toys = [
     {
         productType: "Action Figure",
@@ -136,8 +142,9 @@ const toys = [
         available: false
     }
 ];
-export const createToys = () => {
+const createToys = () => {
     toys.map((toy) => {
-        db.Toy.create(toy);
+        models_1.default.Toy.create(toy);
     });
 };
+exports.createToys = createToys;

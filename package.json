@@ -1,0 +1,20 @@
+{
+  "name": "toytopia",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AshtonMH474/Toytopia.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AshtonMH474/Toytopia/issues"
+  },
+  "homepage": "https://github.com/AshtonMH474/Toytopia#readme",
+  "description": ""
+}
