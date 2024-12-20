@@ -9,7 +9,9 @@
     "dev": "nodemon src/index.ts",
     "build": "tsc -p .",
     "sequelize": "sequelize",
-    "sequelize-cli": "sequelize-cli"
+    "sequelize-cli": "sequelize-cli",
+    "db:migrate": "sequelize-cli db:migrate",
+    "db:seed": "sequelize-cli db:seed:all"
   },
   "keywords": [],
   "author": "",
