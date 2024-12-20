@@ -1,15 +1,8 @@
 'use strict';
-import { Model } from 'sequelize';
+Object.defineProperty(exports, "__esModule", { value: true });
+const sequelize_1 = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-    class Toy extends Model {
-        id;
-        name;
-        productType;
-        price;
-        theme;
-        releaseDate;
-        count;
-        available;
+    class Toy extends sequelize_1.Model {
         /**
          * Helper method for defining associations.
          * This method is not a part of Sequelize lifecycle.

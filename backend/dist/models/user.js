@@ -1,19 +1,12 @@
 'use strict';
-import { Model } from 'sequelize';
-import validator from 'validator';
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
+Object.defineProperty(exports, "__esModule", { value: true });
+const sequelize_1 = require("sequelize");
+const validator_1 = __importDefault(require("validator"));
 module.exports = (sequelize, DataTypes) => {
-    class User extends Model {
-        /**
-         * Helper method for defining associations.
-         * This method is not a part of Sequelize lifecycle.
-         * The `models/index` file will call this method automatically.
-         */
-        id;
-        firstName;
-        lastName;
-        username;
-        email;
-        password;
+    class User extends sequelize_1.Model {
         static associate(models) {
             // define association here
             User.belongsToMany(models.Toy, {
@@ -56,7 +49,7 @@ module.exports = (sequelize, DataTypes) => {
             validate: {
                 len: [8, 30],
                 isNotEmail(value) {
-                    if (validator.isEmail(value)) {
+                    if (validator_1.default.isEmail(value)) {
                         throw new Error("Cannot be an email.");
                     }
                 }
