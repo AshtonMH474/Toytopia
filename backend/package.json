@@ -17,11 +17,18 @@
     "@types/node": "^22.10.2",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.20.3",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "csurf": "^1.10.0",
     "dotenv": "^16.4.7",
     "express": "^4.21.2",
-    "nodemon": "^3.1.9",
+    "express-async-errors": "^3.1.1",
+    "helmet": "^8.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "morgan": "^1.10.0",
+    "per-env": "^1.0.2",
+    "pg": "^8.13.1",
     "sequelize": "^6.37.5",
-    "sqlite3": "^5.1.7",
     "ts-node": "^10.9.2",
     "ts-node-dev": "^2.0.0",
     "typescript": "^5.7.2",
@@ -29,6 +36,9 @@
   },
   "devDependencies": {
     "@types/express": "^5.0.0",
-    "sequelize-cli": "^6.6.2"
+    "dotenv-cli": "^7.4.4",
+    "nodemon": "^3.1.9",
+    "sequelize-cli": "^6.6.2",
+    "sqlite3": "^5.1.7"
   }
 }
