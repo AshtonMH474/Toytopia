@@ -4,7 +4,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "sequelize": "npm run --prefix backend sequelize"
+    "sequelize": "npm run --prefix backend  sequelize-cli",
+    "db:migrate": "npm run --prefix backend  sequelize-cli db:migrate",
+    "db:seed": "npm run --prefix backend  sequelize-cli db:seed:all"
   },
   "repository": {
     "type": "git",
