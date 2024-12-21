@@ -12,7 +12,7 @@
     "sequelize-cli": "sequelize-cli",
     "db:migrate": "sequelize-cli db:migrate",
     "db:seed": "sequelize-cli db:seed:all",
-    "build db": "node dist/psql-setup-script.js"
+    "buildDB": "node dist/psql-setup-script.js"
   },
   "keywords": [],
   "author": "",
