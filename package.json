@@ -19,5 +19,8 @@
     "url": "https://github.com/AshtonMH474/Toytopia/issues"
   },
   "homepage": "https://github.com/AshtonMH474/Toytopia#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "sequelize-cli": "^6.6.2"
+  }
 }
