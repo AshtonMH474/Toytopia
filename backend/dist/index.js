@@ -7,6 +7,7 @@ const express_1 = __importDefault(require("express"));
 require('dotenv').config();
 const config_1 = require("./config");
 const models_1 = __importDefault(require("./models"));
+const users_1 = require("./seeders/users");
 const app = (0, express_1.default)();
 app.use(express_1.default.json());
 models_1.default.sequelize
@@ -19,7 +20,7 @@ models_1.default.sequelize
     .then(() => {
     console.log('Database schema synchronized!');
     try {
-        // createUsers();
+        (0, users_1.createUsers)();
         // seeds users
         console.log('Users seeded successfully!');
         // createToys();

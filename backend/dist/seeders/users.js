@@ -12,21 +12,21 @@ const users = [
         lastName: 'User',
         email: 'demo@gmail.com',
         username: 'demo1234',
-        password: bcryptjs_1.default.hashSync('password')
+        hashedPassword: bcryptjs_1.default.hashSync('password')
     },
     {
         firstName: 'User1',
         lastName: 'Test',
         email: 'user1@gmail.com',
         username: 'user1user',
-        password: bcryptjs_1.default.hashSync('password1')
+        hashedPassword: bcryptjs_1.default.hashSync('password1')
     },
     {
         firstName: 'Jolly',
         lastName: 'Rodger',
         email: 'rodger@gmail.com',
         username: 'rodger1234',
-        password: bcryptjs_1.default.hashSync('password2')
+        hashedPassword: bcryptjs_1.default.hashSync('password2')
     }
 ];
 const createUsers = () => {

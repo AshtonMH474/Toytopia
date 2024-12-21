@@ -14,7 +14,7 @@ interface UserAttributes {
   lastName:string,
   email:string,
   username:string,
-  password:string
+  hashedPassword:string
 }
 
 module.exports = (sequelize:any, DataTypes:any) => {
@@ -30,7 +30,7 @@ module.exports = (sequelize:any, DataTypes:any) => {
     lastName!: string;
     username!: string;
     email!: string;
-    password!: string;
+    hashedPassword!: string;
 
 
     static associate(models:any) {
@@ -62,7 +62,7 @@ module.exports = (sequelize:any, DataTypes:any) => {
         isEmail:true
       }
      },
-     password:{
+     hashedPassword:{
       type:DataTypes.STRING.BINARY,
       allowNull:false,
       validate:{
