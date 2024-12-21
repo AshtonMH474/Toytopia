@@ -6,21 +6,21 @@ const users = [
         lastName:'User',
         email:'demo@gmail.com',
         username:'demo1234',
-        password:bcrypt.hashSync('password')
+        hashedPassword:bcrypt.hashSync('password')
     },
     {
         firstName:'User1',
         lastName:'Test',
         email:'user1@gmail.com',
         username:'user1user',
-        password:bcrypt.hashSync('password1')
+        hashedPassword:bcrypt.hashSync('password1')
     },
     {
         firstName:'Jolly',
         lastName:'Rodger',
         email:'rodger@gmail.com',
         username:'rodger1234',
-        password:bcrypt.hashSync('password2')
+        hashedPassword:bcrypt.hashSync('password2')
     }
 ]
 

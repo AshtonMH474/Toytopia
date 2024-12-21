@@ -23,7 +23,7 @@ app.use(express.json())
     console.log('Database schema synchronized!');
 
     try {
-        // createUsers();
+        createUsers();
         // seeds users
         console.log('Users seeded successfully!');
 
