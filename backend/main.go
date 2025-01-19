@@ -98,7 +98,7 @@ func handleCLICommands(cfg config.Config) {
 			database.ConnectDB(cfg)
 			if len(os.Args) > 2 && os.Args[2] == "all" {
 				log.Println("Running Migrations")
-				database.Database.Db.AutoMigrate(models.User{})
+				database.Database.Db.AutoMigrate(models.User{}, models.Toy{})
 			}
 			os.Exit(0)
 		}
