@@ -12,4 +12,6 @@ type Toy struct {
 	Theme       string    `json:"theme" gorm:"not null"`
 	Count       int       `json:"count" gorm:"not null;default:0"`
 	Available   bool      `json:"available" gorm:"not null;default:false"`
+	UserId      int       `json:"user_id"`
+	User        User      `gorm:"foreignKey:UserId;constraint:OnDelete:CASCADE;"`
 }
