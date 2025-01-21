@@ -119,4 +119,5 @@ func setupRoutes(app *fiber.App) {
 
 	// toys routes
 	app.Post("/api/toys", routes.CreateToy)
+	app.Put("/api/toys/:id", routes.UpdateToy)
 }
