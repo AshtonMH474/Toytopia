@@ -116,4 +116,7 @@ func setupRoutes(app *fiber.App) {
 	app.Get("/api/users/current", routes.GetUser)
 	app.Put("/api/users/:id", routes.UpdateUser)
 	app.Delete("/api/users/:id", routes.DeleteUser)
+
+	// toys routes
+	app.Post("/api/toys", routes.CreateToy)
 }
