@@ -98,7 +98,7 @@ func handleCLICommands(cfg config.Config) {
 			database.ConnectDB(cfg)
 			if len(os.Args) > 2 && os.Args[2] == "all" {
 				log.Println("Running Migrations")
-				database.Database.Db.AutoMigrate(models.User{}, models.Toy{}, models.Wishlist{})
+				database.Database.Db.AutoMigrate(models.User{}, models.Toy{}, models.Wishlist{}, models.ToysInWishlist{})
 			}
 			os.Exit(0)
 		}
@@ -122,4 +122,7 @@ func setupRoutes(app *fiber.App) {
 	app.Post("/api/toys", routes.CreateToy)
 	app.Put("/api/toys/:id", routes.UpdateToy)
 	app.Delete("/api/toys/:id", routes.DeleteToy)
+
+	// wishlists routes
+	app.Get("/api/wishlists", routes.AllWishlists)
 }
