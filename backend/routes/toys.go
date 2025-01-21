@@ -25,6 +25,54 @@ func CreateResToy(toy models.Toy, user UserSerial) ToySerial {
 	return ToySerial{ID: toy.ID, ReleaseDate: toy.ReleaseDate, Price: toy.Price, ProductType: toy.ProductType, Theme: toy.Theme, Count: toy.Count, Available: toy.Available, User: user}
 }
 
+func SearchToys(c *fiber.Ctx) error {
+	var toys []models.Toy
+	query := database.Database.Db.Model(&models.Toy{})
+
+	// retriveing query params
+	productType := c.Query("product_type")
+	theme := c.Query("theme")
+	minPrice := c.Query("min_price")
+	maxPrice := c.Query("max_price")
+
+	// Apply filters based on the parameters
+	if productType != "" {
+		query = query.Where("product_type LIKE ?", "%"+productType+"%")
+	}
+	if theme != "" {
+		query = query.Where("theme LIKE ?", "%"+theme+"%")
+	}
+	if minPrice != "" {
+		query = query.Where("price >= ?", minPrice)
+	}
+	if maxPrice != "" {
+		query = query.Where("price <= ?", maxPrice)
+	}
+
+	// Filter for availability (true or false)
+	available := c.Query("available")
+	if available != "" {
+		var availableBool bool
+		if available == "true" {
+			availableBool = true
+		} else if available == "false" {
+			availableBool = false
+		} else {
+			// Handle invalid input for available
+			return c.Status(400).JSON(fiber.Map{
+				"error": "Invalid value for 'available'. Use 'true' or 'false'.",
+			})
+		}
+		query = query.Where("available = ?", availableBool)
+	}
+
+	if err := query.Find(&toys).Error; err != nil {
+		return c.Status(500).JSON(fiber.Map{"error": "Error fetching toys", "message": err.Error()})
+	}
+
+	// Return the results as a JSON response
+	return c.Status(200).JSON(toys)
+}
 func CreateToy(c *fiber.Ctx) error {
 	tokenString := c.Get("Authorization")
 	if tokenString == "" {
@@ -154,6 +202,54 @@ func UpdateToy(c *fiber.Ctx) error {
 
 	return c.Status(200).JSON(resToy)
 
+}
+
+func DeleteToy(c *fiber.Ctx) error {
+	// Extract the token from the Authorization header
+	tokenString := c.Get("Authorization")
+	if tokenString == "" {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"error": "Authorization token is missing",
+		})
+	}
+
+	// Extract user data from the token
+	userData, ok := extractUserDataFromToken(c)
+	if !ok || userData == nil {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"error": "Invalid or missing token",
+		})
+	}
+
+	// Get the user ID from the token (you could also extract other data like username if needed)
+	tokenUserID := uint(userData["id"].(float64))
+
+	id, err := c.ParamsInt("id")
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error": "Please ensure the ID is an integer",
+		})
+	}
+
+	var toy models.Toy
+	var user models.User
+	if err := findToy(id, &toy); err != nil {
+		return c.Status(400).JSON(err.Error())
+	}
+
+	if err := findUser(int(tokenUserID), &user); err != nil {
+		return c.Status(400).JSON(err.Error())
+	}
+
+	if toy.UserId != int(tokenUserID) || toy.UserId == 0 {
+		return c.Status(401).JSON(fiber.Map{"message": "Unathorzied"})
+	}
+
+	if err := database.Database.Db.Delete(&toy).Error; err != nil {
+		return c.Status(404).JSON(err.Error())
+	}
+
+	return c.Status(200).JSON(resMessage("Successfully Deleted"))
 }
 
 func findToy(id int, toy *models.Toy) error {
