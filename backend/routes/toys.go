@@ -74,13 +74,14 @@ func SearchToys(c *fiber.Ctx) error {
 	return c.Status(200).JSON(toys)
 }
 func CreateToy(c *fiber.Ctx) error {
+	// seeing if token
 	tokenString := c.Get("Authorization")
 	if tokenString == "" {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
 			"error": "Authorization token is missing",
 		})
 	}
-
+	// checking for the user data in token
 	userData, ok := extractUserDataFromToken(c)
 	if !ok || userData == nil {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
@@ -88,9 +89,11 @@ func CreateToy(c *fiber.Ctx) error {
 		})
 	}
 
+	// id of user in token
 	tokenUserID := uint(userData["id"].(float64))
 	var user models.User
 
+	// finds the user based off token id
 	if err := findUser(int(tokenUserID), &user); err != nil {
 		return c.Status(400).JSON(err.Error())
 	}
@@ -99,6 +102,7 @@ func CreateToy(c *fiber.Ctx) error {
 		return c.Status(400).JSON(err.Error())
 	}
 
+	// validates info from req
 	validationErrors := make(map[string]string)
 	if len(toy.ProductType) < 1 {
 		validationErrors["productType"] = "Product Type needed"
@@ -123,6 +127,7 @@ func CreateToy(c *fiber.Ctx) error {
 }
 
 func UpdateToy(c *fiber.Ctx) error {
+	// seeing if token
 	tokenString := c.Get("Authorization")
 	if tokenString == "" {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
@@ -130,6 +135,7 @@ func UpdateToy(c *fiber.Ctx) error {
 		})
 	}
 
+	// seeing if user data in token
 	userData, ok := extractUserDataFromToken(c)
 	if !ok || userData == nil {
 		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
@@ -137,6 +143,7 @@ func UpdateToy(c *fiber.Ctx) error {
 		})
 	}
 
+	// id of user from token
 	tokenUserID := uint(userData["id"].(float64))
 	id, err := c.ParamsInt("id")
 	if err != nil {
@@ -146,6 +153,7 @@ func UpdateToy(c *fiber.Ctx) error {
 	}
 	var toy models.Toy
 	var user models.User
+	// finds toy
 	if err := findToy(id, &toy); err != nil {
 		return c.Status(400).JSON(err.Error())
 	}
@@ -154,6 +162,7 @@ func UpdateToy(c *fiber.Ctx) error {
 		return c.Status(400).JSON(err.Error())
 	}
 
+	// if token id and toy userId r not same
 	if toy.UserId != int(tokenUserID) || toy.UserId == 0 {
 		return c.Status(401).JSON(fiber.Map{"message": "Unathorzied"})
 	}
@@ -171,7 +180,7 @@ func UpdateToy(c *fiber.Ctx) error {
 	if err := c.BodyParser(&data); err != nil {
 		return c.Status(500).JSON(err.Error())
 	}
-
+	// sees what needs to be updated
 	if len(data.ProductType) > 0 {
 		toy.ProductType = data.ProductType
 	}
@@ -188,13 +197,12 @@ func UpdateToy(c *fiber.Ctx) error {
 		toy.Count = *data.Count
 	}
 
+	// if count is above 0 its avaivale true
 	if toy.Count <= 0 {
 		toy.Available = false
 	} else {
 		toy.Available = true
 	}
-
-	// fix count and avaiable
 
 	database.Database.Db.Save(&toy)
 	resUser := CreateResUser(user)
@@ -221,7 +229,7 @@ func DeleteToy(c *fiber.Ctx) error {
 		})
 	}
 
-	// Get the user ID from the token (you could also extract other data like username if needed)
+	// Get the user ID from the token
 	tokenUserID := uint(userData["id"].(float64))
 
 	id, err := c.ParamsInt("id")
