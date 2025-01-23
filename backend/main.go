@@ -127,4 +127,5 @@ func setupRoutes(app *fiber.App) {
 	app.Get("/api/wishlists", routes.AllWishlists)
 	app.Get("/api/wishlists/:id", routes.GetWishlist)
 	app.Post("/api/wishlists", routes.CreateWishlist)
+	app.Post("/api/wishlists/:Id", routes.AddToy)
 }
