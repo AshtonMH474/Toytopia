@@ -11,6 +11,7 @@ func SeedWishlists() {
 	wishslists := []models.Wishlist{
 		{UserId: 1, Name: "Originals", Description: "All the retro toys"},
 		{UserId: 1, Name: "Transformers", Description: "Transformers can transform"},
+		{UserId: 3, Name: "I want", Description: "Random"},
 	}
 
 	for _, wishlist := range wishslists {
@@ -33,7 +34,7 @@ func SeedWishlists() {
 	}
 }
 
-func UndoWishlists() {
+func UndoWishlistsToys() {
 
 	if err := database.Database.Db.Exec("DELETE FROM toys_in_wishlists").Error; err != nil {
 		log.Printf("Failed to delete all toys_in_wishlists: %v\n", err)
@@ -63,10 +64,13 @@ func UndoWishlists() {
 	}
 	// Delete all records in the wishlist table
 
-	if err := database.Database.Db.Exec("DELETE FROM toys_in_wishlists").Error; err != nil {
-		log.Printf("Failed to delete all toys_in_wishlists: %v\n", err)
+}
+
+func UndoAllWishLists() {
+	if err := database.Database.Db.Exec("DELETE FROM wishlists").Error; err != nil {
+		log.Printf("Failed to delete all wishlists: %v\n", err)
 	} else {
-		log.Println("Successfully deleted all toys_in_wishlists from the table.")
+		log.Println("Successfully deleted all wishlists from the table.")
 	}
 
 	// Reset the auto-increment ID for the products table
@@ -89,4 +93,5 @@ func UndoWishlists() {
 	default:
 		log.Println("Unsupported database type. Auto-increment ID reset skipped.")
 	}
+
 }

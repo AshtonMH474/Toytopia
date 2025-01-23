@@ -7,7 +7,8 @@ func SeedAll() {
 }
 
 func UndoSeeds() {
-	UndoWishlists()
+	UndoWishlistsToys()
+	UndoAllWishLists()
 	UndoToys()
 	UndoAllUsers()
 }

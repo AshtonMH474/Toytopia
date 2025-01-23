@@ -98,7 +98,7 @@ func handleCLICommands(cfg config.Config) {
 			database.ConnectDB(cfg)
 			if len(os.Args) > 2 && os.Args[2] == "all" {
 				log.Println("Running Migrations")
-				database.Database.Db.AutoMigrate(models.User{}, models.Toy{}, models.Wishlist{}, models.ToysInWishlist{})
+				database.Database.Db.AutoMigrate(models.User{}, models.Toy{}, models.Wishlist{})
 			}
 			os.Exit(0)
 		}
@@ -125,4 +125,5 @@ func setupRoutes(app *fiber.App) {
 
 	// wishlists routes
 	app.Get("/api/wishlists", routes.AllWishlists)
+	app.Get("/api/wishlists/:id", routes.GetWishlist)
 }
