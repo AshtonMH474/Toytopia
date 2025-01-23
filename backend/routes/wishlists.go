@@ -124,6 +124,56 @@ func GetWishlist(c *fiber.Ctx) error {
 	return c.Status(200).JSON(resWishlist)
 }
 
+func CreateWishlist(c *fiber.Ctx) error {
+	// seeing if token
+	tokenString := c.Get("Authorization")
+	if tokenString == "" {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"error": "Authorization token is missing",
+		})
+	}
+	// checking for the user data in token
+	userData, ok := extractUserDataFromToken(c)
+	if !ok || userData == nil {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"error": "Invalid or missing token",
+		})
+	}
+
+	// id of user in token
+	tokenUserID := uint(userData["id"].(float64))
+	var user models.User
+
+	// finds the user based off token id
+	if err := findUser(int(tokenUserID), &user); err != nil {
+		return c.Status(400).JSON(err.Error())
+	}
+
+	// parses body of req into wishlists
+	var wishlist models.Wishlist
+	if err := c.BodyParser(&wishlist); err != nil {
+		return c.Status(400).JSON(err.Error())
+	}
+	// validates req body
+	validationErrors := make(map[string]string)
+	if len(wishlist.Name) < 1 {
+		validationErrors["Name"] = "Name needed"
+	}
+	if len(validationErrors) > 0 {
+		return c.Status(400).JSON(fiber.Map{"errors": validationErrors})
+	}
+
+	wishlist.UserId = int(user.ID)
+
+	// creates wishlists
+	database.Database.Db.Create(&wishlist)
+	resUser := CreateResUser(user)
+	// empty toys array for res func bcz new wishlists means no toys
+	var toys []ToySerialNoUser
+	resWishlist := CreateResWishlist(wishlist, resUser, toys)
+	return c.Status(201).JSON(resWishlist)
+}
+
 func findWishlist(id int, wishlist *models.Wishlist) error {
 	database.Database.Db.Preload("Toys").Find(&wishlist, "id = ?", id)
 	if wishlist.ID == 0 {
