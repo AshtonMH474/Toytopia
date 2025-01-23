@@ -174,6 +174,75 @@ func CreateWishlist(c *fiber.Ctx) error {
 	return c.Status(201).JSON(resWishlist)
 }
 
+func AddToy(c *fiber.Ctx) error {
+	// seeing if token
+	tokenString := c.Get("Authorization")
+	if tokenString == "" {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"error": "Authorization token is missing",
+		})
+	}
+
+	userData, ok := extractUserDataFromToken(c)
+	if !ok || userData == nil {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"error": "Invalid or missing token",
+		})
+	}
+	tokenUserID := uint(userData["id"].(float64))
+	var user models.User
+	if err := findUser(int(tokenUserID), &user); err != nil {
+		return c.Status(400).JSON(err.Error())
+	}
+
+	id, err := c.ParamsInt("id")
+
+	if err != nil {
+		return c.Status(400).JSON("please ensure Id is int")
+	}
+
+	var wishlist models.Wishlist
+	// finds wishlist
+	if err := findWishlist(id, &wishlist); err != nil {
+		return c.Status(404).JSON(err.Error())
+	}
+
+	// if user id is not same as token
+	if wishlist.UserId != int(user.ID) {
+		return c.Status(403).JSON(fiber.Map{
+			"error": "You are not authorized to update this wishlist",
+		})
+	}
+
+	var toys_in_wishlists []models.ToysInWishlist
+	if err := c.BodyParser(&toys_in_wishlists); err != nil {
+		return c.Status(400).JSON(err.Error())
+	}
+
+	for _, toy := range toys_in_wishlists {
+		toy.WishlistId = int(wishlist.ID)
+		if err := database.Database.Db.Create(&toy).Error; err != nil {
+			return c.Status(403).JSON(fiber.Map{
+				"error": "Failed To Add Toy",
+			})
+		}
+	}
+
+	// finds wishlist
+	if err := findWishlist(id, &wishlist); err != nil {
+		return c.Status(404).JSON(err.Error())
+	}
+
+	var toys []ToySerialNoUser
+	for _, toy := range wishlist.Toys {
+		resToy := NoUserResToy(toy)
+		toys = append(toys, resToy)
+	}
+	resUser := CreateResUser(user)
+	resWishlist := CreateResWishlist(wishlist, resUser, toys)
+	return c.Status(201).JSON(resWishlist)
+}
+
 func findWishlist(id int, wishlist *models.Wishlist) error {
 	database.Database.Db.Preload("Toys").Find(&wishlist, "id = ?", id)
 	if wishlist.ID == 0 {
