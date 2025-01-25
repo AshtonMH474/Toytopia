@@ -2,6 +2,7 @@ package routes
 
 import (
 	"errors"
+	"log"
 
 	database "github.com/AshtonMH474/Toytopia/db"
 	"github.com/AshtonMH474/Toytopia/models"
@@ -241,6 +242,61 @@ func AddToy(c *fiber.Ctx) error {
 	resUser := CreateResUser(user)
 	resWishlist := CreateResWishlist(wishlist, resUser, toys)
 	return c.Status(201).JSON(resWishlist)
+}
+
+func RemoveToy(c *fiber.Ctx) error {
+	// seeing if token
+	tokenString := c.Get("Authorization")
+	if tokenString == "" {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"error": "Authorization token is missing",
+		})
+	}
+
+	userData, ok := extractUserDataFromToken(c)
+	if !ok || userData == nil {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"error": "Invalid or missing token",
+		})
+	}
+	tokenUserID := uint(userData["id"].(float64))
+	var user models.User
+	if err := findUser(int(tokenUserID), &user); err != nil {
+		return c.Status(400).JSON(err.Error())
+	}
+	log.Printf("test1")
+	wishlistId, err := c.ParamsInt("wishlistId")
+	toyId, err := c.ParamsInt("toyId")
+
+	if err != nil {
+		return c.Status(400).JSON("please ensure Id is int")
+	}
+
+	var wishlist models.Wishlist
+	// finds wishlist
+	if err := findWishlist(wishlistId, &wishlist); err != nil {
+		return c.Status(404).JSON(err.Error())
+	}
+	log.Printf("test2")
+
+	// if user id is not same as token
+	if wishlist.UserId != int(user.ID) {
+		return c.Status(403).JSON(fiber.Map{
+			"error": "You are not authorized to update this wishlist",
+		})
+	}
+	log.Printf("test3")
+
+	if err := database.Database.Db.Where("wishlist_id = ? AND toy_id = ?", wishlistId, toyId).Delete(&models.ToysInWishlist{}).Error; err != nil {
+		log.Printf("test4")
+		return c.Status(400).JSON(fiber.Map{
+			"error": "couldn't delete toy from wishlist",
+		})
+	}
+	log.Printf("test5")
+	return c.Status(200).JSON(fiber.Map{
+		"message": "successfully deleted",
+	})
 }
 
 func findWishlist(id int, wishlist *models.Wishlist) error {
