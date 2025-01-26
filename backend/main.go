@@ -129,4 +129,6 @@ func setupRoutes(app *fiber.App) {
 	app.Post("/api/wishlists", routes.CreateWishlist)
 	app.Post("/api/wishlists/:Id", routes.AddToy)
 	app.Delete("/api/wishlists/:wishlistId/toys/:toyId", routes.RemoveToy)
+	app.Put("/api/wishlists/:id", routes.UpdateWishlist)
+	app.Delete("/api/wishlists/:id", routes.DeleteWishlist)
 }

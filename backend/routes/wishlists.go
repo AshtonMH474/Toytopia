@@ -299,6 +299,118 @@ func RemoveToy(c *fiber.Ctx) error {
 	})
 }
 
+func UpdateWishlist(c *fiber.Ctx) error {
+	// seeing if token
+	tokenString := c.Get("Authorization")
+	if tokenString == "" {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"error": "Authorization token is missing",
+		})
+	}
+
+	// seeing if user data in token
+	userData, ok := extractUserDataFromToken(c)
+	if !ok || userData == nil {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"error": "Invalid or missing token",
+		})
+	}
+
+	// id of user from token
+	tokenUserID := uint(userData["id"].(float64))
+	id, err := c.ParamsInt("id")
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error": "Please ensure the ID is an integer",
+		})
+	}
+	var wishlist models.Wishlist
+	if err := findWishlist(id, &wishlist); err != nil {
+		return c.Status(400).JSON(err.Error())
+	}
+	var user models.User
+	if err := findUser(int(tokenUserID), &user); err != nil {
+		return c.Status(400).JSON(err.Error())
+	}
+
+	// if token id and wishlist userId r not same
+	if wishlist.UserId != int(tokenUserID) || wishlist.UserId == 0 {
+		return c.Status(401).JSON(fiber.Map{"message": "Unathorzied"})
+	}
+
+	type UpdatedWishlist struct {
+		Name        string `json:"name" gorm:"not null"`
+		Description string `json:"description"`
+	}
+
+	var data UpdatedWishlist
+	if err := c.BodyParser(&data); err != nil {
+		return c.Status(500).JSON(err.Error())
+	}
+
+	if len(data.Name) > 0 {
+		wishlist.Name = data.Name
+	}
+	if len(data.Description) > 0 {
+		wishlist.Description = data.Description
+	}
+
+	database.Database.Db.Save(&wishlist)
+	var toys []ToySerialNoUser
+	for _, toy := range wishlist.Toys {
+		resToy := NoUserResToy(toy)
+		toys = append(toys, resToy)
+	}
+	resUser := CreateResUser(user)
+	resWishlist := CreateResWishlist(wishlist, resUser, toys)
+	return c.Status(200).JSON(resWishlist)
+}
+
+func DeleteWishlist(c *fiber.Ctx) error {
+	// seeing if token
+	tokenString := c.Get("Authorization")
+	if tokenString == "" {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"error": "Authorization token is missing",
+		})
+	}
+
+	// seeing if user data in token
+	userData, ok := extractUserDataFromToken(c)
+	if !ok || userData == nil {
+		return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{
+			"error": "Invalid or missing token",
+		})
+	}
+
+	// id of user from token
+	tokenUserID := uint(userData["id"].(float64))
+	id, err := c.ParamsInt("id")
+	if err != nil {
+		return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{
+			"error": "Please ensure the ID is an integer",
+		})
+	}
+	var wishlist models.Wishlist
+	if err := findWishlist(id, &wishlist); err != nil {
+		return c.Status(400).JSON(err.Error())
+	}
+	var user models.User
+	if err := findUser(int(tokenUserID), &user); err != nil {
+		return c.Status(400).JSON(err.Error())
+	}
+
+	// if token id and wishlist userId r not same
+	if wishlist.UserId != int(tokenUserID) || wishlist.UserId == 0 {
+		return c.Status(401).JSON(fiber.Map{"message": "Unathorzied"})
+	}
+
+	if err := database.Database.Db.Delete(&wishlist).Error; err != nil {
+		return c.Status(404).JSON(err.Error())
+	}
+	return c.Status(200).JSON(resMessage("Successfully Deleted"))
+}
+
 func findWishlist(id int, wishlist *models.Wishlist) error {
 	database.Database.Db.Preload("Toys").Find(&wishlist, "id = ?", id)
 	if wishlist.ID == 0 {
