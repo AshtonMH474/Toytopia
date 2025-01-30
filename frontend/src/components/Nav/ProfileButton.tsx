@@ -5,6 +5,7 @@ import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import LoginFormPage from "../LoginFormPage/LoginFormPage";
 // import SignupFormModal from "../SignupFormModal/SignupFormModal"; // Ensure this is imported correctly
 import { useNavigate } from "react-router-dom";
+import SignupFormModal from '../SignupFormModal/SignupFormModal';
 
 // Define user prop type
 interface User {
@@ -76,10 +77,10 @@ function ProfileButton({ user }: ProfileButtonProps) {
                 />
               </div>
               <div>
-                {/* <OpenModalButton
+                <OpenModalButton
                   buttonText="Sign Up"
                   modalComponent={<SignupFormModal />}
-                /> */}
+                />
               </div>
             </div>
           )}
