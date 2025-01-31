@@ -2,6 +2,7 @@ import { ThunkAction, ThunkDispatch } from "redux-thunk";
 import {USER_FAILED, USER_SUCCESS } from "../Constants/userConstants";
 import { AnyAction } from "redux";
 import { authFetch } from "../store/auth";
+import { RootState } from "../store/store";
 
 export const login = (email,password) : ThunkAction<Promise<void>,RootState,unknown,AnyAction> =>
     async (dispatch: ThunkDispatch<RootState,unknown,AnyAction>): Promise<void>=> {
