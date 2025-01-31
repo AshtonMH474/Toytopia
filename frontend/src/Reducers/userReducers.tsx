@@ -1,29 +1,30 @@
 import { USER_FAILED, USER_LOGIN, USER_LOGOUT, USER_SUCCESS } from "../Constants/userConstants";
 
 export interface UserState {
-    loading?:boolean,
-    error?:string,
-    userInfo:{firstName?:string, lastName?:string,email?:string,username?:string,id?:number}
+    loading?: boolean;
+    error?: string | null | undefined;
+    userInfo: { firstName?: string, lastName?: string, email?: string, username?: string, id?: number } | null;
 }
 
 interface Action {
-    type:string,
-    payload?:string
+    type: string;
+    payload?: { firstName?: string, lastName?: string, email?: string, username?: string, id?: number } | null | string;
 }
 
-export const userLoginReducer = (state:UserState = {userInfo:{}},action:Action) => {
-    switch(action.type){
+export const userLoginReducer = (state: UserState = { userInfo: null }, action: Action): UserState => {
+    switch (action.type) {
         case USER_LOGOUT:
-            return {userInfo:null}
+            return { userInfo: null };
         case USER_FAILED:
-            return {loading:false, error:action.payload,userInfo:null}
+            // Ensure error is only set to a string or null
+            return { loading: false, error: typeof action.payload === 'string' ? action.payload : null, userInfo: null };
         case USER_SUCCESS:
-            return {loading:false,userInfo:action.payload}
+            // Ensure the payload is valid for userInfo
+            const userInfo = action.payload && typeof action.payload !== 'string' ? action.payload : null;
+            return { loading: false, userInfo };
         case USER_LOGIN:
-            return {loading:true}
+            return { loading: true, userInfo: null };
         default:
-            return state
-
+            return state;
     }
-
-}
+};

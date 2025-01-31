@@ -3,7 +3,8 @@ import { useState, FormEvent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
 import { login } from '../../Actions/userActions';
-import { AppDispatch } from '../../store/store';
+import { AppDispatch, RootState } from '../../store/store';
+import { UserState } from '../../Reducers/userReducers';
 // Adjust path to the store if necessary
 
 // Type for the errors state
@@ -13,7 +14,7 @@ interface Errors {
 
 function LoginFormPage() {
   const dispatch = useDispatch<AppDispatch>();
-  const sessionUser = useSelector((state: RootState) => state.session.user);
+  const sessionUser = useSelector<RootState, UserState>((state) => state.user);
   const [credential, setCredential] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [errors, setErrors] = useState<Errors>({});
