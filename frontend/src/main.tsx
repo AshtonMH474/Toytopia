@@ -3,11 +3,11 @@ import { createRoot } from 'react-dom/client'
 import { Provider } from 'react-redux';
 import './index.css'
 import App from './App.tsx'
-import configureStore from './store/store.js';
+import store from './store/store.tsx';
 import { Modal, ModalProvider } from './Context/Modal.tsx';
 
 
-const store = configureStore();
+
 
 if (process.env.NODE_ENV !== 'production') {
   window.store = store;

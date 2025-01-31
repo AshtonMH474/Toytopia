@@ -17,9 +17,11 @@ import (
 )
 
 type SafeUser struct {
-	ID       uint   `json:"id"`
-	Email    string `json:"email"`
-	Username string `json:"username"`
+	ID        uint   `json:"id"`
+	Email     string `json:"email"`
+	Username  string `json:"username"`
+	LastName  string `json:"last_name"`
+	FirstName string `json:"first_name"`
 }
 
 type UserSerial struct {
@@ -80,9 +82,11 @@ func LoginHandler(c *fiber.Ctx) error {
 
 	// Set token cookie
 	safeUser := SafeUser{
-		ID:       foundUser.ID,
-		Email:    foundUser.Email,
-		Username: foundUser.Username,
+		ID:        foundUser.ID,
+		Email:     foundUser.Email,
+		Username:  foundUser.Username,
+		FirstName: foundUser.FirstName,
+		LastName:  foundUser.LastName,
 	}
 
 	_, err = SetTokenCookie(c, safeUser)

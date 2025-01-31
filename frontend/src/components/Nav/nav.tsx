@@ -6,7 +6,7 @@ import ProfileButton from './ProfileButton';
 
 function Navigation( ) {
 
-  const sessionUser = useSelector((state:RootState)=> state.session.user);
+//   const sessionUser = useSelector((state:RootState)=> state.session.user);
 
 
   return (
@@ -17,7 +17,7 @@ function Navigation( ) {
 
         <div className='allProfile'>
             <div>
-          <ProfileButton user={sessionUser}  />
+          {/* <ProfileButton user={sessionUser ?? null}  /> */}
           </div>
         </div>
 
