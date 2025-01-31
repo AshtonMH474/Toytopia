@@ -1,7 +1,9 @@
 import { useState, FormEvent } from 'react';
-import * as sessionActions from '../../store/session';
+
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
+import { login } from '../../Actions/userActions';
+import { AppDispatch } from '../../store/store';
 // Adjust path to the store if necessary
 
 // Type for the errors state
@@ -10,7 +12,7 @@ interface Errors {
 }
 
 function LoginFormPage() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const sessionUser = useSelector((state: RootState) => state.session.user);
   const [credential, setCredential] = useState<string>('');
   const [password, setPassword] = useState<string>('');
@@ -21,14 +23,7 @@ function LoginFormPage() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setErrors({});
-    try {
-    //   await dispatch(sessionActions.login({ credential, password }));
-    } catch (res: unknown) {
-      if (res instanceof Response) {
-        const data = await res.json();
-        if (data?.errors) setErrors(data.errors);
-      }
-    }
+    dispatch(login(credential,password))
   };
 
   return (
