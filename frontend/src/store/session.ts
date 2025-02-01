@@ -72,6 +72,15 @@ export const login = (user: LoginPayload) => async (dispatch: React.Dispatch<Ses
   return response;
 };
 
+export const logoutUser = () => async (dispatch: React.Dispatch<SessionActions>) => {
+    const res = await authFetch(`/api/logout`, {
+        method:"DELETE"
+    })
+    await res.json()
+    await dispatch(removeUser())
+    return res
+}
+
 // Session state interface
 export interface SessionState {
   user: User | null;

@@ -1,11 +1,14 @@
 import { useState, useEffect, useRef, MouseEvent } from 'react';
-// import { useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import LoginFormPage from "../LoginFormPage/LoginFormPage";
 // import SignupFormModal from "../SignupFormModal/SignupFormModal"; // Ensure this is imported correctly
 // import { useNavigate } from "react-router-dom";
 import SignupFormModal from '../SignupFormModal/SignupFormModal';
+import { logoutUser } from '../../store/session';
+import { useModal } from '../../Context/Modal';
+import { AppDispatch } from '../../store/store';
 
 // Define user prop type
 interface User {
@@ -20,9 +23,10 @@ interface ProfileButtonProps {
 
 function ProfileButton({ user }: ProfileButtonProps) {
 //   const navigate = useNavigate();
-//   const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef<HTMLDivElement | null>(null);
+  const {closeModal} = useModal()
 
   const toggleMenu = (e: MouseEvent<HTMLDivElement>) => {
     e.stopPropagation();
@@ -43,10 +47,11 @@ function ProfileButton({ user }: ProfileButtonProps) {
     return () => document.removeEventListener("click", closeMenu as any);
   }, [showMenu]);
 
-  const logout = (e: MouseEvent<HTMLButtonElement>) => {
+  const logout = async (e: MouseEvent<HTMLButtonElement>) => {
     e.preventDefault();
-    // dispatch(sessionActions.logout());
+    await dispatch(logoutUser());
     setShowMenu(false);
+    await closeModal()
     // navigate('/');
   };
 
