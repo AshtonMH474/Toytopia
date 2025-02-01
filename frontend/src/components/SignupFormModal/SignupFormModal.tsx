@@ -1,12 +1,14 @@
 import { useEffect,useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from '../../Context/Modal';
-import * as sessionActions from '../../store/session';
+
+import { AppDispatch } from '../../store/store';
+import { signupUser } from '../../store/session';
 
 
 
 function SignupFormModal() {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
   const [email, setEmail] = useState("");
   const [username, setUsername] = useState("");
   const [firstName, setFirstName] = useState("");
@@ -36,22 +38,22 @@ function SignupFormModal() {
     e.preventDefault();
     if (password === confirmPassword) {
       setErrors({});
-    //   return dispatch(
-    //     sessionActions.signup({
-    //       email,
-    //       username,
-    //       firstName,
-    //       lastName,
-    //       password
-    //     })
-    //   )
-    //     .then(closeModal)
-    //     .catch(async (res) => {
-    //       const data = await res.json();
-    //       if (data?.errors) {
-    //         setErrors(data.errors);
-    //       }
-    //     });
+      return dispatch(
+        signupUser({
+          email,
+          username,
+          firstName,
+          lastName,
+          password
+        })
+      )
+        .then(closeModal)
+        .catch(async (res) => {
+          const data = await res.json();
+          if (data?.errors) {
+            setErrors(data.errors);
+          }
+        });
     }
 
     return setErrors({

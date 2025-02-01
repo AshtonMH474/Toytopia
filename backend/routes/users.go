@@ -149,9 +149,11 @@ func SignupHandler() fiber.Handler {
 
 		// Set token cookie
 		safeUser := SafeUser{
-			ID:       user.ID,
-			Email:    user.Email,
-			Username: user.Username,
+			ID:        user.ID,
+			Email:     user.Email,
+			Username:  user.Username,
+			FirstName: user.FirstName,
+			LastName:  user.LastName,
 		}
 		_, err = SetTokenCookie(c, safeUser)
 		if err != nil {

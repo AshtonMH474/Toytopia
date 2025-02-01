@@ -40,6 +40,14 @@ interface LoginPayload {
   password: string;
 }
 
+interface SignupPayload {
+    email:string;
+    username:string;
+    password:string;
+    firstName:string;
+    lastName:string;
+}
+
 export const restoreUser = () => async (dispatch: React.Dispatch<SessionActions>) =>{
     try {
         // Make the API request
@@ -78,6 +86,24 @@ export const logoutUser = () => async (dispatch: React.Dispatch<SessionActions>)
     })
     await res.json()
     await dispatch(removeUser())
+    return res
+}
+
+
+export const signupUser = (user:SignupPayload) => async (dispatch:React.Dispatch<SessionActions>) => {
+    const { username, firstName, lastName, email, password } = user;
+    const res = await authFetch(`/api/users`, {
+        method:'POST',
+        body: JSON.stringify({
+            username,
+            first_name:firstName,
+            last_name: lastName,
+            email,
+            password
+          })
+    })
+    const data = await res.json();
+    await dispatch(setUser(data.user))
     return res
 }
 
