@@ -43,7 +43,7 @@ interface LoginPayload {
 export const restoreUser = () => async (dispatch: React.Dispatch<SessionActions>) =>{
     try {
         // Make the API request
-        const response = await authFetch('/api/user/current');
+        const response = await authFetch('/api/users/current');
 
         // Parse the response
         const data = await response.json();
