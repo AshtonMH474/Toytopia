@@ -7,9 +7,11 @@ import { User } from '../../store/session';
 // import './Navigation.css';
 
 
-function Navigation( ) {
+function Navigation({isLoaded}) {
+
 
     const sessionUser = useSelector<RootState, User | null>((state) => state.user.user);
+
 
 
   return (
@@ -17,13 +19,15 @@ function Navigation( ) {
 
 
 
+        {isLoaded && (
+             <div className='allProfile'>
+             <div>
+             <ProfileButton user={sessionUser} />
 
-        <div className='allProfile'>
-            <div>
-            <ProfileButton user={sessionUser} />
+           </div>
+         </div>
+        )}
 
-          </div>
-        </div>
 
 
         </div>

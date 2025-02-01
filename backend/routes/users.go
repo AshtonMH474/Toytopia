@@ -179,17 +179,23 @@ func GetUser(c *fiber.Ctx) error {
 
 	userData, ok := extractUserDataFromToken(c)
 	if !ok || userData == nil {
-		return c.Status(401).JSON(fiber.Map{
-			"error": "Invalid or missing user data in token",
-		})
+		return c.JSON(fiber.Map{"user": nil})
 	}
 
 	if ok && userData != nil {
 		// Safe user data
+		var user models.User
+		id := int(userData["id"].(float64))
+		if err := findUser(id, &user); err != nil {
+			return c.Status(400).JSON(err.Error())
+		}
+
 		safeUser := SafeUser{
-			ID:       uint(userData["id"].(float64)),
-			Email:    userData["email"].(string),
-			Username: userData["username"].(string),
+			ID:        user.ID,
+			Email:     user.Email,
+			Username:  user.Username,
+			FirstName: user.FirstName,
+			LastName:  user.LastName,
 		}
 
 		return c.JSON(fiber.Map{
@@ -378,9 +384,11 @@ func SetTokenCookie(ctx *fiber.Ctx, user SafeUser) (string, error) {
 	// Create the token
 	token := jwt.NewWithClaims(jwt.SigningMethodHS256, jwt.MapClaims{
 		"data": SafeUser{
-			ID:       user.ID,
-			Email:    user.Email,
-			Username: user.Username,
+			ID:        user.ID,
+			Email:     user.Email,
+			Username:  user.Username,
+			FirstName: user.FirstName,
+			LastName:  user.LastName,
 		},
 		"exp": time.Now().Add(time.Duration(jwtExpiresIn) * time.Second).Unix(),
 	})

@@ -40,6 +40,27 @@ interface LoginPayload {
   password: string;
 }
 
+export const restoreUser = () => async (dispatch: React.Dispatch<SessionActions>) =>{
+    try {
+        // Make the API request
+        const response = await authFetch('/api/user/current');
+
+        // Parse the response
+        const data = await response.json();
+
+        // Log the entire data object to the console
+        console.log("User data from API:", data);
+
+        // Dispatch the action to store the user data
+        await dispatch(setUser(data.user));
+
+        // Return the response (optional)
+        return response;
+    } catch (error) {
+        console.error("Error fetching user data:", error);
+    }
+}
+
 export const login = (user: LoginPayload) => async (dispatch: React.Dispatch<SessionActions>) => {
   const { email, password } = user;
   const response = await authFetch('/api/login', {
@@ -47,7 +68,6 @@ export const login = (user: LoginPayload) => async (dispatch: React.Dispatch<Ses
     body: JSON.stringify({ email:email, password }),
   });
   const data = await response.json();
-  console.log(data)
   await dispatch(setUser(data.user));
   return response;
 };
