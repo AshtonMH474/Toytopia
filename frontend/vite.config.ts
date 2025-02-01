@@ -13,7 +13,11 @@ export default defineConfig(({ mode }) => ({
   ],
   server: {
     proxy: {
-      '/api': 'http://localhost:8016',
+      '/api': {
+        target: 'http://127.0.0.1:8038',
+        changeOrigin: true,
+        secure: false,
+      },
     },
   },
 }));

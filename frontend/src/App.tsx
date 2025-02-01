@@ -1,5 +1,4 @@
 
-import { useEffect } from 'react';
 import './App.css'
 import Navigation from './components/Nav/nav';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
@@ -11,7 +10,6 @@ function Layout() {
 
   return (
     <>
-      <Navigation />
       <Outlet />
     </>
   );
@@ -30,11 +28,6 @@ const router = createBrowserRouter([
 ]);
 
 function App() {
-
-    useEffect(() => {
-      document.title = "ashton's airbnb"
-
-    }, [])
   return <RouterProvider router={router} />;
 }
 

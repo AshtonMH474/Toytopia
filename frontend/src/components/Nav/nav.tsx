@@ -1,15 +1,16 @@
-import { NavLink } from 'react-router-dom';
+
 import { useSelector } from 'react-redux';
 import ProfileButton from './ProfileButton';
-import { UserState } from '../../Reducers/userReducers';
+
 import { RootState } from '../../store/store';
+import { User } from '../../store/session';
 // import './Navigation.css';
 
 
 function Navigation( ) {
 
-    const sessionUser = useSelector<RootState, UserState>((state) => state.user);
-    const {userInfo} = sessionUser
+    const sessionUser = useSelector<RootState, User | null>((state) => state.user.user);
+
 
   return (
     <div className='containerNav'>
@@ -19,7 +20,7 @@ function Navigation( ) {
 
         <div className='allProfile'>
             <div>
-            <ProfileButton user={userInfo ?? { firstName: '', lastName: '', email: '', username: '', id: null }} />
+            <ProfileButton user={sessionUser} />
 
           </div>
         </div>

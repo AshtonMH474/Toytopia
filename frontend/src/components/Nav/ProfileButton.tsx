@@ -1,10 +1,10 @@
 import { useState, useEffect, useRef, MouseEvent } from 'react';
-import { useDispatch } from 'react-redux';
-import * as sessionActions from '../../store/session';
+// import { useDispatch } from 'react-redux';
+
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import LoginFormPage from "../LoginFormPage/LoginFormPage";
 // import SignupFormModal from "../SignupFormModal/SignupFormModal"; // Ensure this is imported correctly
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 import SignupFormModal from '../SignupFormModal/SignupFormModal';
 
 // Define user prop type
@@ -19,8 +19,8 @@ interface ProfileButtonProps {
 }
 
 function ProfileButton({ user }: ProfileButtonProps) {
-  const navigate = useNavigate();
-  const dispatch = useDispatch();
+//   const navigate = useNavigate();
+//   const dispatch = useDispatch();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef<HTMLDivElement | null>(null);
 
@@ -47,7 +47,7 @@ function ProfileButton({ user }: ProfileButtonProps) {
     e.preventDefault();
     // dispatch(sessionActions.logout());
     setShowMenu(false);
-    navigate('/');
+    // navigate('/');
   };
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
@@ -58,7 +58,7 @@ function ProfileButton({ user }: ProfileButtonProps) {
         <button>Profile</button>
       </div>
 
-      {showMenu && (
+      {/* {showMenu && (
         <div className={ulClassName} ref={ulRef}>
           {user ? (
             <div className="boxProfile">
@@ -68,7 +68,7 @@ function ProfileButton({ user }: ProfileButtonProps) {
                 <button className="buttonProfile" onClick={logout}>Log Out</button>
               </div>
             </div>
-          ) : (
+          ) : ( */}
             <div className="boxProfile">
               <div>
                 <OpenModalButton
@@ -83,9 +83,9 @@ function ProfileButton({ user }: ProfileButtonProps) {
                 />
               </div>
             </div>
-          )}
-        </div>
-      )}
+          {/* )} */}
+        {/* </div> */}
+      {/* )} */}
     </>
   );
 }

@@ -2,6 +2,7 @@ package routes
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
 	"os"
 	"strconv"
@@ -45,6 +46,8 @@ func LoginHandler(c *fiber.Ctx) error {
 	if err := c.BodyParser(&user); err != nil {
 		return c.Status(400).JSON(err.Error())
 	}
+
+	fmt.Println(user.Password, user.Email)
 
 	if len(user.Password) < 8 {
 		return c.Status(400).JSON(fiber.Map{

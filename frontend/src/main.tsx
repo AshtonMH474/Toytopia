@@ -5,6 +5,7 @@ import './index.css'
 import App from './App.tsx'
 import store from './store/store.tsx';
 import { Modal, ModalProvider } from './Context/Modal.tsx';
+import Navigation from './components/Nav/nav.tsx';
 
 
 
@@ -15,11 +16,14 @@ if (process.env.NODE_ENV !== 'production') {
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-    <ModalProvider>
+
     <Provider store={store}>
+    <ModalProvider>
+      <Navigation/>
       <App />
       <Modal/>
+      </ModalProvider>
     </Provider>
-    </ModalProvider>
+
   </StrictMode>,
 )
