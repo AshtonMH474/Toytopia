@@ -3,12 +3,13 @@ import { applyMiddleware, compose, } from "redux";
 import {thunk, ThunkDispatch} from "redux-thunk";
 import { userLoginReducer } from "../Reducers/userReducers";
 import { Dispatch } from "react";
+import sessionReducer from "./session";
 
 
 // Define reducers
 const reducers = combineReducers({
   // your reducers here
-  user:userLoginReducer
+  user:sessionReducer
 });
 
 // Initial state

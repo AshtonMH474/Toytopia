@@ -2,20 +2,21 @@ import { useState, FormEvent } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { Navigate } from 'react-router-dom';
-import { login } from '../../Actions/userActions';
+
 import { AppDispatch, RootState } from '../../store/store';
-import { UserState } from '../../Reducers/userReducers';
+
+import { login, User } from '../../store/session';
 // Adjust path to the store if necessary
 
 // Type for the errors state
 interface Errors {
-  credential?: string;
+  email?: string;
 }
 
 function LoginFormPage() {
   const dispatch = useDispatch<AppDispatch>();
-  const sessionUser = useSelector<RootState, UserState>((state) => state.user);
-  const [credential, setCredential] = useState<string>('');
+  const sessionUser = useSelector<RootState, User | null>((state) => state.user.user);
+  const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
   const [errors, setErrors] = useState<Errors>({});
 
@@ -24,7 +25,7 @@ function LoginFormPage() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setErrors({});
-    dispatch(login(credential,password))
+    dispatch(login({email,password}))
   };
 
   return (
@@ -35,8 +36,8 @@ function LoginFormPage() {
           Username or Email
           <input
             type="text"
-            value={credential}
-            onChange={(e) => setCredential(e.target.value)}
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
             required
           />
         </label>
@@ -49,7 +50,7 @@ function LoginFormPage() {
             required
           />
         </label>
-        {errors.credential && <p>{errors.credential}</p>}
+        {errors.email && <p>{errors.email}</p>}
         <button type="submit">Log In</button>
       </form>
     </>

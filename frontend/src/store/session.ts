@@ -5,10 +5,12 @@ const SET_USER = 'session/setUser';
 const REMOVE_USER = 'session/removeUser';
 
 // Action interfaces
-interface User {
+export interface User {
   id: number;
   username: string;
   email: string;
+  firstName:string;
+  lastName:string
 }
 
 interface SetUserAction {
@@ -34,18 +36,39 @@ export const removeUser = (): RemoveUserAction => ({
 
 // Thunk action for login
 interface LoginPayload {
-  credential: string;
+  email: string;
   password: string;
 }
 
+export const restoreUser = () => async (dispatch: React.Dispatch<SessionActions>) =>{
+    try {
+        // Make the API request
+        const response = await authFetch('/api/user/current');
+
+        // Parse the response
+        const data = await response.json();
+
+        // Log the entire data object to the console
+        console.log("User data from API:", data);
+
+        // Dispatch the action to store the user data
+        await dispatch(setUser(data.user));
+
+        // Return the response (optional)
+        return response;
+    } catch (error) {
+        console.error("Error fetching user data:", error);
+    }
+}
+
 export const login = (user: LoginPayload) => async (dispatch: React.Dispatch<SessionActions>) => {
-  const { credential, password } = user;
+  const { email, password } = user;
   const response = await authFetch('/api/login', {
     method: 'POST',
-    body: JSON.stringify({ credential, password }),
+    body: JSON.stringify({ email:email, password }),
   });
   const data = await response.json();
-  dispatch(setUser(data.user));
+  await dispatch(setUser(data.user));
   return response;
 };
 
