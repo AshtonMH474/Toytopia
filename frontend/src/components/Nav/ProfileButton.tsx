@@ -58,7 +58,7 @@ function ProfileButton({ user }: ProfileButtonProps) {
         <button>Profile</button>
       </div>
 
-      {/* {showMenu && (
+      {showMenu && (
         <div className={ulClassName} ref={ulRef}>
           {user ? (
             <div className="boxProfile">
@@ -68,7 +68,7 @@ function ProfileButton({ user }: ProfileButtonProps) {
                 <button className="buttonProfile" onClick={logout}>Log Out</button>
               </div>
             </div>
-          ) : ( */}
+          ) : (
             <div className="boxProfile">
               <div>
                 <OpenModalButton
@@ -83,9 +83,9 @@ function ProfileButton({ user }: ProfileButtonProps) {
                 />
               </div>
             </div>
-          {/* )} */}
-        {/* </div> */}
-      {/* )} */}
+          )}
+        </div>
+      )}
     </>
   );
 }
