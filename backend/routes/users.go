@@ -149,9 +149,11 @@ func SignupHandler() fiber.Handler {
 
 		// Set token cookie
 		safeUser := SafeUser{
-			ID:       user.ID,
-			Email:    user.Email,
-			Username: user.Username,
+			ID:        user.ID,
+			Email:     user.Email,
+			Username:  user.Username,
+			FirstName: user.FirstName,
+			LastName:  user.LastName,
 		}
 		_, err = SetTokenCookie(c, safeUser)
 		if err != nil {
@@ -167,7 +169,14 @@ func SignupHandler() fiber.Handler {
 
 func Logout(c *fiber.Ctx) error {
 	// Clear the cookie
-	c.ClearCookie("token")
+	c.Cookie(&fiber.Cookie{
+		Name:     "token",
+		Value:    "",
+		Expires:  time.Now().Add(-1 * time.Hour), // Set expiration to the past
+		HTTPOnly: true,
+		Secure:   os.Getenv("NODE_ENV") == "production",
+		SameSite: "Lax",
+	})
 
 	// Return a JSON response
 	return c.JSON(fiber.Map{
