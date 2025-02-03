@@ -131,4 +131,13 @@ func setupRoutes(app *fiber.App) {
 	app.Delete("/api/wishlists/:wishlistId/toys/:toyId", routes.RemoveToy)
 	app.Put("/api/wishlists/:id", routes.UpdateWishlist)
 	app.Delete("/api/wishlists/:id", routes.DeleteWishlist)
+
+	// Serve React frontend from "dist" directory
+	app.Static("/", "../frontend/dist", fiber.Static{
+		Compress: true,
+	})
+	// Serve "index.html" for unknown routes (React Router support)
+	app.Use(func(c *fiber.Ctx) error {
+		return c.SendFile("../frontend/dist/index.html")
+	})
 }
