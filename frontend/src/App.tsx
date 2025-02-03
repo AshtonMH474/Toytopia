@@ -1,4 +1,4 @@
-import './App.css'
+// import './App.css'
 import Navigation from './components/Nav/nav';
 import { createBrowserRouter, Outlet, RouterProvider } from 'react-router-dom';
 import Home from './components/Home/Home';
