@@ -18,7 +18,8 @@ const initialState = {};
 // Define the enhancer type as StoreEnhancer
 let enhancer: StoreEnhancer<any, any> | undefined;
 
-if (import.meta.env.MODE === "production") {
+// if (import.meta.env.MODE === "production") {
+if (import.meta.env.PROD){
   // In production, apply only the thunk middleware
   enhancer = applyMiddleware(thunk as any);
 } else {

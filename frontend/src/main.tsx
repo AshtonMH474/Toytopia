@@ -9,7 +9,8 @@ import { Modal, ModalProvider } from './Context/Modal.tsx';
 
 
 
-if (process.env.NODE_ENV !== 'production') {
+// if (process.env.NODE_ENV !== 'production') {
+if(import.meta.env.PROD){
   window.store = store;
 }
 
