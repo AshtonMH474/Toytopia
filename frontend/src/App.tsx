@@ -6,6 +6,9 @@ import { useDispatch } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { restoreUser } from './store/session';
 import { AppDispatch } from './store/store';
+import Toys from './components/Toys';
+import Wishlists from './components/Wishlist';
+import Reviews from './components/Reviews';
 function Layout() {
   const dispatch = useDispatch<AppDispatch>();
   const [isLoaded, setIsLoaded] = useState<boolean>(false);
@@ -34,6 +37,18 @@ const router = createBrowserRouter([
       {
         path: '/',
         element: <Home/>
+      },
+      {
+        path:'/toys',
+        element:<Toys/>
+      },
+      {
+        path:'/wishlists',
+        element:<Wishlists/>
+      },
+      {
+        path:'/reviews',
+        element:<Reviews/>
       }
     ]
   }

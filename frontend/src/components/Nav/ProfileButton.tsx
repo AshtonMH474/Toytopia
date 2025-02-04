@@ -1,14 +1,15 @@
 import { useState, useEffect, useRef, MouseEvent } from 'react';
 import { useDispatch } from 'react-redux';
-
 import OpenModalButton from "../OpenModalButton/OpenModalButton";
 import LoginFormPage from "../LoginFormPage/LoginFormPage";
-// import SignupFormModal from "../SignupFormModal/SignupFormModal"; // Ensure this is imported correctly
-// import { useNavigate } from "react-router-dom";
 import SignupFormModal from '../SignupFormModal/SignupFormModal';
 import { logoutUser } from '../../store/session';
 import { useModal } from '../../Context/Modal';
 import { AppDispatch } from '../../store/store';
+import { IoMenu } from "react-icons/io5";
+import { IoIosExit } from "react-icons/io";
+import { useNavigate } from 'react-router-dom';
+
 
 // Define user prop type
 interface User {
@@ -22,7 +23,7 @@ interface ProfileButtonProps {
 }
 
 function ProfileButton({ user }: ProfileButtonProps) {
-//   const navigate = useNavigate();
+    const nav = useNavigate()
   const dispatch = useDispatch<AppDispatch>();
   const [showMenu, setShowMenu] = useState(false);
   const ulRef = useRef<HTMLDivElement | null>(null);
@@ -52,15 +53,18 @@ function ProfileButton({ user }: ProfileButtonProps) {
     await dispatch(logoutUser());
     setShowMenu(false);
     await closeModal()
-    // navigate('/');
+
   };
+  const goHome = async() => {
+    nav('/')
+  }
 
   const ulClassName = "profile-dropdown" + (showMenu ? "" : " hidden");
 
   return (
     <>
       <div className="profile" onClick={toggleMenu}>
-        <button>Profile</button>
+        <IoMenu/>
       </div>
 
       {showMenu && (
@@ -75,19 +79,29 @@ function ProfileButton({ user }: ProfileButtonProps) {
             </div>
           ) : (
             <div className="boxProfile">
+                <div onClick={goHome}>
+                    Home
+                </div>
               <div>
                 <OpenModalButton
                   buttonText="Log In"
                   modalComponent={<LoginFormPage />}
                 />
               </div>
+
               <div>
                 <OpenModalButton
                   buttonText="Sign Up"
                   modalComponent={<SignupFormModal />}
                 />
               </div>
+
+              <div onClick={toggleMenu}>
+              <IoIosExit/>
+              </div>
+
             </div>
+
           )}
         </div>
       )}

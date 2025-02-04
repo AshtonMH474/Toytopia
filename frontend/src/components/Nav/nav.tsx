@@ -22,7 +22,7 @@ function Navigation({isLoaded}) {
         {isLoaded && (
              <div className='allProfile'>
              <div>
-             <ProfileButton user={sessionUser} />
+             {/* <ProfileButton user={sessionUser} /> */}
 
            </div>
          </div>
