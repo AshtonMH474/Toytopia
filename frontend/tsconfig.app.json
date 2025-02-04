@@ -25,5 +25,5 @@
     "noImplicitAny": false, // Allow implicit `any` types
 
   },
-  "include": ["src"]
+  "include": ["src","vite-env.d.ts"]
 }
