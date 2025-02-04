@@ -1,0 +1,28 @@
+.sidebar{
+    background-color: white;
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding: 2rem 1rem;
+    width: 15rem;
+    height: 100vh;
+}
+.dinoLogo{
+    height: 100px;
+    width: 100px;
+}
+.sidebar .logoContainer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.sidebar .logoContainer .title{
+    font-size: 31.42px;
+    color: #FF5A5F;
+    padding: 0 0 0 1rem;
+    font-family: 'Fredoka One', cursive;
+    text-shadow: 1px 1px 0px #000, 0px 0px 0px #FF4500;
+    letter-spacing: 1px;
+    transform: rotate(-2deg);
+}
