@@ -1,5 +1,6 @@
+
 .sidebar{
-    background-color: white;
+    background-color:#f0f0f0;
     position: absolute;
     top: 0;
     left: 0;
@@ -8,21 +9,88 @@
     height: 100vh;
 }
 .dinoLogo{
-    height: 100px;
-    width: 100px;
+    height: 70px;
+    width: auto;
 }
 .sidebar .logoContainer{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
+    padding-left: 10px;
 }
 
 .sidebar .logoContainer .title{
-    font-size: 31.42px;
+    font-size: 28px;
     color: #FF5A5F;
     padding: 0 0 0 1rem;
     font-family: 'Fredoka One', cursive;
     text-shadow: 1px 1px 0px #000, 0px 0px 0px #FF4500;
     letter-spacing: 1px;
     transform: rotate(-2deg);
+}
+
+.burgerContainer{
+    content: '';
+    background-color: #FF5A5F;
+    position: absolute;
+    right: -17.5px;
+    top: calc(11.5rem/ 1.5);
+    width: 35px;
+    height: 35px;
+    border-radius: 2rem;
+    z-index: 1;
+}
+
+.burgerTrigger{
+    content: '';
+    width: 35px;
+    height: 35px;
+    background-color: #000;
+    z-index: 2;
+    cursor: pointer;
+    opacity: 0;
+}
+.burgerMenu{
+    position: relative;
+    content: '';
+    background-color: white;
+    z-index: 1;
+    width: 20px;
+    height: 3px;
+    border-radius: 2rem;
+    bottom: calc(35px/ 1.5);
+    left: 0.45rem;
+}
+.profileContainer{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 3rem 0 0 1rem;
+}
+
+.imgProfile{
+    width: auto;
+    height: 3.5rem;
+}
+
+.profileContents{
+    padding-left: 10px;
+}
+.profileContents .name{
+    padding: 0;
+    margin:0;
+    font-size: 16.7px;
+    color: darkgray;
+    text-transform: capitalize;
+    font-weight: 800;
+}
+.profileContents .email{
+    padding: 0;
+    margin:0;
+    font-size: 13.9px;
+    color: darkgray;
+    text-transform: lowercase;
+}
+h1 {
+    text-align: center;
 }

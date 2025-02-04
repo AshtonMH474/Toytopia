@@ -34,10 +34,10 @@ function Navigation({isLoaded}) {
                 <div className='burgerMenu'></div>
             </div>
             <div className='profileContainer'>
-                <CgProfile/>
-                <div className='ProfileContents'>
-                    <p className='user name'>Hello, John</p>
-                    <p>johnsmith@gmail.com</p>
+                <CgProfile className='imgProfile'/>
+                <div className='profileContents'>
+                    <p className='name'>Hello, John</p>
+                    <p className='email'>johnsmith@gmail.com</p>
 
                 </div>
             </div>
