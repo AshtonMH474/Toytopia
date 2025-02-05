@@ -40,6 +40,16 @@
     border-radius: 2rem;
     z-index: 1;
 }
+.burgerContainer::after{
+    content: '';
+    position: absolute;
+    right: 35px;
+    top: 17.5px;
+    width: calc(6rem + 15rem);
+    z-index: 0;
+    background-color: #333333;
+    height: 2px;
+}
 
 .burgerTrigger{
     content: '';
@@ -53,13 +63,37 @@
 .burgerMenu{
     position: relative;
     content: '';
+    background-color: #FF5A5F;
+    z-index: 1;
+    width: 20px;
+    height: 3px;
+    border-radius: 2rem;
+    bottom: calc(30px/ 1.5);
+    left: 0.45rem;
+}
+.burgerMenu::after{
+    position: absolute;
+    content: '';
     background-color: white;
     z-index: 1;
     width: 20px;
     height: 3px;
     border-radius: 2rem;
-    bottom: calc(35px/ 1.5);
-    left: 0.45rem;
+    bottom: calc(25px/ 1.5);
+    top: 0.4rem;
+    transform:translateY(-0.4rem) rotate(45deg) ;
+}
+.burgerMenu::before{
+    position: absolute;
+    content: '';
+    background-color: white;
+    z-index: 1;
+    width: 20px;
+    height: 3px;
+    border-radius: 2rem;
+    bottom: calc(25px/ 1.5);
+    top: -0.4rem;
+    transform:translateY(0.4rem) rotate(-45deg) ;
 }
 .profileContainer{
     display: flex;
@@ -91,6 +125,56 @@
     color: darkgray;
     text-transform: lowercase;
 }
+.contentsContainer{
+    margin: 2rem 0 0 0;
+    padding-left: 15px;
+}
+.contentsContainer ul{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.contentsContainer li{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    margin: 0.75rem 0;
+    padding: 0.75rem 0;
+    width: 100%;
+    border-radius: 1rem;
+}
+.contentsContainer li .link{
+    display: flex;
+    text-decoration: none;
+    color: darkgrey;
+    font-size: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+.contentsContainer li .link:hover .logo{
+    color: #FF5A5F;
+}
+
+.contentsContainer .logo{
+    height: 3.5rem;
+    width: auto;
+    padding: 0 1rem 0 0;
+    transition: color 0.3s ease;
+}
+
+.sidebar.active{
+    width: 5rem;
+}
+
+.logoContainer.active.title{
+    opacity: 0;
+}
+
 h1 {
     text-align: center;
 }

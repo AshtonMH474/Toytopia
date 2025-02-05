@@ -23,9 +23,9 @@ function Navigation({isLoaded}) {
     return (
         <>
         {isLoaded && (
-        <div className='sidebar'>
+        <div className='sidebar active'>
 
-            <div className='logoContainer'>
+            <div className='logoContainer active'>
                 <img src={dino} alt="dino" className='dinoLogo'/>
                 <h2 className='title'>Toytopia</h2>
             </div>
@@ -44,27 +44,27 @@ function Navigation({isLoaded}) {
             <div className='contentsContainer'>
                 <ul>
                     <li>
-                        <Link to='/'>
-                            <FaHome/>
-                            Home
+                        <Link to='/' className='link'>
+                            <FaHome className='logo'/>
+                            <div>Home</div>
                         </Link>
                     </li>
                     <li>
-                        <Link to='/toys'>
-                            <MdToys/>
-                            Toys
+                        <Link to='/toys' className='link'>
+                            <MdToys className='logo'/>
+                            <div>Toys</div>
                         </Link>
                     </li>
                     <li>
-                        <Link to='/wishlists'>
-                            <MdDashboardCustomize/>
-                            Wishlist
+                        <Link to='/wishlists' className='link'>
+                            <MdDashboardCustomize className='logo'/>
+                            <div>Wishlist</div>
                         </Link>
                     </li>
                     <li>
-                        <Link to='/reviews'>
-                            <MdReviews/>
-                            Reviews
+                        <Link to='/reviews' className='link'>
+                            <MdReviews className='logo'/>
+                            <div>Reviews</div>
                         </Link>
                     </li>
                 </ul>
