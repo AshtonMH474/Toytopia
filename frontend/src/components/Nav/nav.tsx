@@ -1,7 +1,5 @@
 
 // import { useSelector } from 'react-redux';
-// import { IoMenu } from "react-icons/io5";
-// import { IoIosExit } from "react-icons/io";
 import dino from '../../../images/dino.png'
 import { CgProfile } from "react-icons/cg";
 import { MdToys } from "react-icons/md";
@@ -19,7 +17,6 @@ import { useState } from 'react';
 
 function Navigation({isLoaded}) {
     // const sessionUser = useSelector<RootState, User | null>((state) => state.user.user);
-    // const location = useLocation()
     const [showMenu,setMenu] = useState<boolean>(false)
 
     const handleCloseMenu = () => {
