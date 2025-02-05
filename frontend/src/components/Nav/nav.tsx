@@ -14,26 +14,31 @@ import { FaHome } from "react-icons/fa";
 // import { User } from '../../store/session';
 import { Link } from 'react-router-dom';
 import './nav.css';
+import { useState } from 'react';
 
 
 function Navigation({isLoaded}) {
     // const sessionUser = useSelector<RootState, User | null>((state) => state.user.user);
+    // const location = useLocation()
+    const [showMenu,setMenu] = useState<boolean>(false)
 
-
+    const handleCloseMenu = () => {
+        setMenu(!showMenu)
+    }
     return (
         <>
         {isLoaded && (
-        <div className='sidebar active'>
+        <div className={showMenu == false ? 'sidebar' : "sidebar active"}>
 
-            <div className='logoContainer active'>
+            <div className={showMenu == false ? 'logoContainer' : 'logoContainer active'} >
                 <img src={dino} alt="dino" className='dinoLogo'/>
                 <h2 className='title'>Toytopia</h2>
             </div>
-            <div className='burgerContainer active'>
-                <div className='burgerTrigger'></div>
+            <div className={showMenu == false ? 'burgerContainer' : 'burgerContainer active'}>
+                <div onClick={handleCloseMenu} className='burgerTrigger'></div>
                 <div className='burgerMenu'></div>
             </div>
-            <div className='profileContainer active'>
+            <div className={showMenu == false ? 'profileContainer' : 'profileContainer active'}>
                 <div><CgProfile className='imgProfile'/></div>
                 <div className='profileContents'>
                     <p className='name'>Hello, John</p>
@@ -41,7 +46,7 @@ function Navigation({isLoaded}) {
 
                 </div>
             </div>
-            <div className='contentsContainer active'>
+            <div className={showMenu == false ? 'contentsContainer' : 'contentsContainer active'}>
                 <ul>
                     <li>
                         <Link to='/' className='link'>
