@@ -14,57 +14,62 @@ import { FaHome } from "react-icons/fa";
 // import { User } from '../../store/session';
 import { Link } from 'react-router-dom';
 import './nav.css';
+import { useState } from 'react';
 
 
 function Navigation({isLoaded}) {
     // const sessionUser = useSelector<RootState, User | null>((state) => state.user.user);
+    // const location = useLocation()
+    const [showMenu,setMenu] = useState<boolean>(false)
 
-
+    const handleCloseMenu = () => {
+        setMenu(!showMenu)
+    }
     return (
         <>
         {isLoaded && (
-        <div className='sidebar'>
+        <div className={showMenu == false ? 'sidebar' : "sidebar active"}>
 
-            <div className='logoContainer'>
+            <div className={showMenu == false ? 'logoContainer' : 'logoContainer active'} >
                 <img src={dino} alt="dino" className='dinoLogo'/>
                 <h2 className='title'>Toytopia</h2>
             </div>
-            <div className='burgerContainer'>
-                <div className='burgerTrigger'></div>
+            <div className={showMenu == false ? 'burgerContainer' : 'burgerContainer active'}>
+                <div onClick={handleCloseMenu} className='burgerTrigger'></div>
                 <div className='burgerMenu'></div>
             </div>
-            <div className='profileContainer'>
-                <CgProfile/>
-                <div className='ProfileContents'>
-                    <p className='user name'>Hello, John</p>
-                    <p>johnsmith@gmail.com</p>
+            <div className={showMenu == false ? 'profileContainer' : 'profileContainer active'}>
+                <div><CgProfile className='imgProfile'/></div>
+                <div className='profileContents'>
+                    <p className='name'>Hello, John</p>
+                    <p className='email'>johnsmith@gmail.com</p>
 
                 </div>
             </div>
-            <div className='contentsContainer'>
+            <div className={showMenu == false ? 'contentsContainer' : 'contentsContainer active'}>
                 <ul>
                     <li>
-                        <Link to='/'>
-                            <FaHome/>
-                            Home
+                        <Link to='/' className='link'>
+                            <FaHome className='logo'/>
+                            <div>Home</div>
                         </Link>
                     </li>
                     <li>
-                        <Link to='/toys'>
-                            <MdToys/>
-                            Toys
+                        <Link to='/toys' className='link'>
+                            <MdToys className='logo'/>
+                            <div>Toys</div>
                         </Link>
                     </li>
                     <li>
-                        <Link to='/wishlists'>
-                            <MdDashboardCustomize/>
-                            Wishlist
+                        <Link to='/wishlists' className='link'>
+                            <MdDashboardCustomize className='logo'/>
+                            <div>Wishlist</div>
                         </Link>
                     </li>
                     <li>
-                        <Link to='/reviews'>
-                            <MdReviews/>
-                            Reviews
+                        <Link to='/reviews' className='link'>
+                            <MdReviews className='logo'/>
+                            <div>Reviews</div>
                         </Link>
                     </li>
                 </ul>

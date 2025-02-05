@@ -1,5 +1,6 @@
+
 .sidebar{
-    background-color: white;
+    background-color:#f0f0f0;
     position: absolute;
     top: 0;
     left: 0;
@@ -8,21 +9,198 @@
     height: 100vh;
 }
 .dinoLogo{
-    height: 100px;
-    width: 100px;
+    height: 70px;
+    width: auto;
 }
 .sidebar .logoContainer{
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
 }
 
 .sidebar .logoContainer .title{
-    font-size: 31.42px;
+    font-size: 28px;
     color: #FF5A5F;
     padding: 0 0 0 1rem;
     font-family: 'Fredoka One', cursive;
     text-shadow: 1px 1px 0px #000, 0px 0px 0px #FF4500;
     letter-spacing: 1px;
     transform: rotate(-2deg);
+}
+
+.logoContainer.active .title{
+    opacity: 0;
+}
+
+.burgerContainer{
+    content: '';
+    background-color: #FF5A5F;
+    position: absolute;
+    right: -17.5px;
+    top: calc(11.5rem/ 1.5);
+    width: 35px;
+    height: 35px;
+    border-radius: 2rem;
+    z-index: 1;
+}
+.burgerContainer::after{
+    content: '';
+    position: absolute;
+    right: 35px;
+    top: 17.5px;
+    width: calc(6rem + 15rem);
+    z-index: 0;
+    background-color: #333333;
+    height: 2px;
+}
+
+.burgerTrigger{
+    content: '';
+    width: 35px;
+    height: 35px;
+    background-color: #000;
+    z-index: 4;
+    cursor: pointer;
+    opacity: 0;
+    position: relative;
+}
+.burgerMenu{
+    position: relative;
+    content: '';
+    background-color: #FF5A5F;
+    z-index: 1;
+    width: 20px;
+    height: 3px;
+    border-radius: 2rem;
+    bottom: calc(30px/ 1.5);
+    left: 0.45rem;
+}
+.burgerMenu::after{
+    position: absolute;
+    content: '';
+    background-color: white;
+    z-index: 1;
+    width: 20px;
+    height: 3px;
+    border-radius: 2rem;
+    bottom: calc(25px/ 1.5);
+    top: 0.4rem;
+    transform:translateY(-0.4rem) rotate(45deg) ;
+}
+.burgerMenu::before{
+    position: absolute;
+    content: '';
+    background-color: white;
+    z-index: 1;
+    width: 20px;
+    height: 3px;
+    border-radius: 2rem;
+    bottom: calc(25px/ 1.5);
+    top: -0.4rem;
+    transform:translateY(0.4rem) rotate(-45deg) ;
+}
+.profileContainer{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    padding: 3rem 0 0 .9rem;
+}
+
+.imgProfile{
+    width: auto;
+    height: 3.5rem;
+}
+
+.profileContents{
+    padding-left: 10px;
+}
+.profileContents .name{
+    padding: 0;
+    margin:0;
+    font-size: 16.7px;
+    color: darkgray;
+    text-transform: capitalize;
+    font-weight: 800;
+}
+.profileContents .email{
+    padding: 0;
+    margin:0;
+    font-size: 13.9px;
+    color: darkgray;
+    text-transform: lowercase;
+}
+.contentsContainer{
+    margin: 2rem 0 0 0;
+    padding-left: 15px;
+}
+.contentsContainer ul{
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    flex-direction: column;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.contentsContainer li{
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    flex-direction: row;
+    margin: 0.75rem 0;
+    padding: 0.75rem 0;
+    width: 100%;
+    border-radius: 1rem;
+}
+.contentsContainer li .link{
+    display: flex;
+    text-decoration: none;
+    color: darkgrey;
+    font-size: 20px;
+    align-items: center;
+    justify-content: space-between;
+}
+.contentsContainer li .link:hover{
+    background-color: lightgray;
+}
+.contentsContainer li .link:hover .logo{
+    color: #FF5A5F;
+}
+
+.contentsContainer .logo{
+    height: 3.5rem;
+    width: auto;
+    padding: 0 1rem 0 0;
+    transition: color 0.3s ease;
+}
+
+.sidebar.active{
+    width: 5rem;
+}
+
+.logoContainer.active.title{
+    opacity: 0;
+}
+
+.burgerContainer.active .burgerMenu{
+    background-color: white;
+}
+.burgerContainer.active .burgerMenu::before{
+    transform: translateY(0rem) rotate(0deg);
+}
+.burgerContainer.active .burgerMenu::after{
+    transform: translateY(0rem) rotate(0deg);
+}
+
+.profileContainer.active .profileContents{
+    opacity: 0;
+}
+
+.contentsContainer.active ul li div{
+    opacity: 0;
+}
+
+
+h1 {
+    text-align: center;
 }
