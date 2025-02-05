@@ -16,7 +16,6 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding-left: 10px;
 }
 
 .sidebar .logoContainer .title{
@@ -27,6 +26,10 @@
     text-shadow: 1px 1px 0px #000, 0px 0px 0px #FF4500;
     letter-spacing: 1px;
     transform: rotate(-2deg);
+}
+
+.logoContainer.active .title{
+    opacity: 0;
 }
 
 .burgerContainer{
@@ -99,7 +102,7 @@
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    padding: 3rem 0 0 1rem;
+    padding: 3rem 0 0 .9rem;
 }
 
 .imgProfile{
@@ -156,6 +159,9 @@
     align-items: center;
     justify-content: space-between;
 }
+.contentsContainer li .link:hover{
+    background-color: lightgray;
+}
 .contentsContainer li .link:hover .logo{
     color: #FF5A5F;
 }
@@ -174,6 +180,28 @@
 .logoContainer.active.title{
     opacity: 0;
 }
+
+.burgerContainer.active{
+
+}
+.burgerContainer.active .burgerMenu{
+    background-color: white;
+}
+.burgerContainer.active .burgerMenu::before{
+    transform: translateY(0rem) rotate(0deg);
+}
+.burgerContainer.active .burgerMenu::after{
+    transform: translateY(0rem) rotate(0deg);
+}
+
+.profileContainer.active .profileContents{
+    opacity: 0;
+}
+
+.contentsContainer.active ul li div{
+    opacity: 0;
+}
+
 
 h1 {
     text-align: center;

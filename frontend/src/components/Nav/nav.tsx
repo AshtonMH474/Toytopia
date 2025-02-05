@@ -29,19 +29,19 @@ function Navigation({isLoaded}) {
                 <img src={dino} alt="dino" className='dinoLogo'/>
                 <h2 className='title'>Toytopia</h2>
             </div>
-            <div className='burgerContainer'>
+            <div className='burgerContainer active'>
                 <div className='burgerTrigger'></div>
                 <div className='burgerMenu'></div>
             </div>
-            <div className='profileContainer'>
-                <CgProfile className='imgProfile'/>
+            <div className='profileContainer active'>
+                <div><CgProfile className='imgProfile'/></div>
                 <div className='profileContents'>
                     <p className='name'>Hello, John</p>
                     <p className='email'>johnsmith@gmail.com</p>
 
                 </div>
             </div>
-            <div className='contentsContainer'>
+            <div className='contentsContainer active'>
                 <ul>
                     <li>
                         <Link to='/' className='link'>
