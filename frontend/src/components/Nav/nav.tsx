@@ -74,31 +74,31 @@ function Navigation({isLoaded}) {
                     <li>
                         <Link to='/' className='link'>
                             <FaHome className='logo'/>
-                            <div>Home</div>
+                            <div className='title'>Home</div>
                         </Link>
                     </li>
                     <li>
                         <Link to='/toys' className='link'>
                             <MdToys className='logo'/>
-                            <div>Toys</div>
+                            <div className='title'>Toys</div>
                         </Link>
                     </li>
                     <li>
                         <Link to='/wishlists' className='link'>
                             <MdDashboardCustomize className='logo'/>
-                            <div>Wishlist</div>
+                            <div className='title'>Wishlist</div>
                         </Link>
                     </li>
                     <li>
                         <Link to='/reviews' className='link'>
                             <MdReviews className='logo'/>
-                            <div>Reviews</div>
+                            <div className='title'>Reviews</div>
                         </Link>
                     </li>
                     {sessionUser && (<li>
                         <Link onClick={logout} to = '/' className='link'>
-                            <IoIosExit className='logo'/>
-                            <div>Logout</div>
+                            <IoIosExit className='logo logout'/>
+                            <div className='title logout'>Logout</div>
                         </Link>
                     </li>)}
                 </ul>
@@ -108,26 +108,6 @@ function Navigation({isLoaded}) {
         )}
         </>
     )
-//   return (
-//     <div className='containerNav'>
-
-
-
-//         {isLoaded && (
-//              <div className='allProfile'>
-//              <div>
-//              {/* <ProfileButton user={sessionUser} /> */}
-
-//            </div>
-//          </div>
-//         )}
-
-
-
-//         </div>
-
-
-//   );
 }
 
 export default Navigation;

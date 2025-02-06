@@ -155,6 +155,7 @@
 .contentsContainer{
     margin: 2rem 0 0 0;
     padding-left: 15px;
+
 }
 .contentsContainer ul{
     display: flex;
@@ -164,6 +165,8 @@
     list-style: none;
     padding: 0;
     margin: 0;
+
+
 }
 .contentsContainer li{
     display: flex;
@@ -172,7 +175,6 @@
     flex-direction: row;
     margin: 0.75rem 0;
     padding: 0.75rem 0;
-    width: 100%;
     border-radius: 1rem;
 }
 .contentsContainer li .link{
@@ -182,9 +184,7 @@
     font-size: 20px;
     align-items: center;
     justify-content: space-between;
-}
-.contentsContainer li .link:hover{
-    background-color: lightgray;
+
 }
 .contentsContainer li .link:hover .logo{
     color: #FF5A5F;
@@ -195,6 +195,15 @@
     width: auto;
     padding: 0 1rem 0 0;
     transition: color 0.3s ease;
+}
+.contentsContainer .logo.logout{
+    height: 4rem;
+    position: relative;
+    right: 10px;
+}
+.contentsContainer .title.logout{
+    position: relative;
+    right: 6px;
 }
 
 .sidebar.active{
@@ -223,7 +232,7 @@
     opacity: 0;
 }
 
-.contentsContainer.active ul li div{
+.contentsContainer.active ul li .title{
     opacity: 0;
 }
 
