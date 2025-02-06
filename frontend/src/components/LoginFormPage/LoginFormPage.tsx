@@ -1,12 +1,11 @@
 import { useState, FormEvent } from 'react';
 
 import { useDispatch } from 'react-redux';
-// import { Navigate } from 'react-router-dom';
-
+import './login.css'
 import { AppDispatch } from '../../store/store';
 import { useModal } from '../../Context/Modal';
 import { login } from '../../store/session';
-// Adjust path to the store if necessary
+
 
 // Type for the errors state
 interface Errors {
