@@ -1,4 +1,6 @@
-
+*{
+    font-family: sans-serif;
+}
 .sidebar{
     background-color:#f0f0f0;
     position: absolute;
@@ -23,7 +25,7 @@
     font-size: 28px;
     color: #FF5A5F;
     padding: 0 0 0 1rem;
-    font-family: 'Fredoka One', cursive;
+    /* font-family: 'Fredoka One', cursive; */
     letter-spacing: 1px;
 }
 
@@ -134,6 +136,10 @@
 }
 .profileContents .options{
     cursor: pointer;
+    transition: color 0.3s ease;
+}
+.profileContents .options:hover{
+    color: #FF5A5F;
 }
 
 .profileContents .login{
@@ -185,8 +191,15 @@
     align-items: center;
     justify-content: space-between;
 
+
+}
+.title{
+    transition: color 0.3s ease;
 }
 .contentsContainer li .link:hover .logo{
+    color: #FF5A5F;
+}
+.contentsContainer li .link:hover .title{
     color: #FF5A5F;
 }
 
@@ -205,6 +218,7 @@
     position: relative;
     right: 6px;
 }
+
 
 .sidebar.active{
     width: 5rem;

@@ -23,7 +23,6 @@ function Navigation({isLoaded}) {
     const [showMenu,setMenu] = useState<boolean>(false)
     const {setModalContent,closeModal} = useModal()
     const dispatch = useDispatch<AppDispatch>()
-    console.log(sessionUser)
 
     const handleCloseMenu = () => {
         setMenu(!showMenu)
