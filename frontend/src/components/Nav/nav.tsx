@@ -1,27 +1,46 @@
 
-// import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import dino from '../../../images/dino.png'
 import { CgProfile } from "react-icons/cg";
 import { MdToys } from "react-icons/md";
 import { MdDashboardCustomize } from "react-icons/md";
 import { MdReviews } from "react-icons/md";
 import { FaHome } from "react-icons/fa";
-// import ProfileButton from './ProfileButton';
-
-// import { RootState } from '../../store/store';
-// import { User } from '../../store/session';
+import { IoIosExit } from "react-icons/io";
+import { AppDispatch, RootState } from '../../store/store';
+import { logoutUser, User } from '../../store/session';
 import { Link } from 'react-router-dom';
 import './nav.css';
 import { useState } from 'react';
+import LoginFormPage from '../LoginFormPage/LoginFormPage';
+import SignupFormModal from '../SignupFormModal/SignupFormModal';
+import { useModal } from '../../Context/Modal';
+import { MouseEvent } from 'react';
 
 
 function Navigation({isLoaded}) {
-    // const sessionUser = useSelector<RootState, User | null>((state) => state.user.user);
+    const sessionUser = useSelector<RootState, User | null>((state) => state.user.user);
     const [showMenu,setMenu] = useState<boolean>(false)
+    const {setModalContent,closeModal} = useModal()
+    const dispatch = useDispatch<AppDispatch>()
+    console.log(sessionUser)
 
     const handleCloseMenu = () => {
         setMenu(!showMenu)
     }
+
+    const signup = () => {
+        setModalContent(<SignupFormModal />);
+    }
+    const login = () => {
+        setModalContent(<LoginFormPage />);
+    }
+   const logout = async (e: MouseEvent<HTMLElement>) => {
+       e.preventDefault();
+       await dispatch(logoutUser());
+       await closeModal()
+     };
+
     return (
         <>
         {isLoaded && (
@@ -37,11 +56,18 @@ function Navigation({isLoaded}) {
             </div>
             <div className={showMenu == false ? 'profileContainer' : 'profileContainer active'}>
                 <div><CgProfile className='imgProfile'/></div>
-                <div className='profileContents'>
-                    <p className='name'>Hello, John</p>
-                    <p className='email'>johnsmith@gmail.com</p>
+                {sessionUser ? (<div className='profileContents'>
+                    <p className='name'>Hello, {sessionUser.first_name}</p>
+                    <p className='email'>{sessionUser.email}</p>
 
-                </div>
+                </div>):(
+                    <div className='profileContents'>
+                        <p onClick={login} className='login options'>Login</p>
+
+                        <p onClick={signup} className='signup options'>Sign Up</p>
+                    </div>
+                )}
+
             </div>
             <div className={showMenu == false ? 'contentsContainer' : 'contentsContainer active'}>
                 <ul>
@@ -69,6 +95,12 @@ function Navigation({isLoaded}) {
                             <div>Reviews</div>
                         </Link>
                     </li>
+                    {sessionUser && (<li>
+                        <Link onClick={logout} to = '/' className='link'>
+                            <IoIosExit className='logo'/>
+                            <div>Logout</div>
+                        </Link>
+                    </li>)}
                 </ul>
             </div>
 
