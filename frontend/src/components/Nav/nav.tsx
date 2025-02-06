@@ -9,7 +9,7 @@ import { FaHome } from "react-icons/fa";
 import { IoIosExit } from "react-icons/io";
 import { AppDispatch, RootState } from '../../store/store';
 import { logoutUser, User } from '../../store/session';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import './nav.css';
 import { useState } from 'react';
 import LoginFormPage from '../LoginFormPage/LoginFormPage';
@@ -19,8 +19,9 @@ import { MouseEvent } from 'react';
 
 
 function Navigation({isLoaded}) {
+    const navigate = useNavigate()
     const sessionUser = useSelector<RootState, User | null>((state) => state.user.user);
-    const [showMenu,setMenu] = useState<boolean>(false)
+    const [showMenu,setMenu] = useState<boolean>(true)
     const {setModalContent,closeModal} = useModal()
     const dispatch = useDispatch<AppDispatch>()
 
@@ -37,6 +38,7 @@ function Navigation({isLoaded}) {
    const logout = async (e: MouseEvent<HTMLElement>) => {
        e.preventDefault();
        await dispatch(logoutUser());
+       await navigate('/')
        await closeModal()
      };
 

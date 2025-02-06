@@ -25,12 +25,11 @@
     font-size: 28px;
     color: #FF5A5F;
     padding: 0 0 0 1rem;
-    /* font-family: 'Fredoka One', cursive; */
     letter-spacing: 1px;
 }
 
 .logoContainer.active .title{
-    opacity: 0;
+    visibility: hidden;
 }
 
 .burgerContainer{
@@ -154,7 +153,6 @@
     margin:0;
     font-size: 15px;
     color: darkgray;
-    /* text-transform: lowercase; */
 }
 
 
@@ -243,11 +241,11 @@
 }
 
 .profileContainer.active .profileContents{
-    opacity: 0;
+    visibility: hidden;
 }
 
 .contentsContainer.active ul li .title{
-    opacity: 0;
+    visibility: hidden;
 }
 
 
