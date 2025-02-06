@@ -32,9 +32,9 @@ const {closeModal} = useModal();
   return (
     <>
       <h1>Log In</h1>
-      <form onSubmit={handleSubmit}>
+      <form className="login form"onSubmit={handleSubmit}>
         <label>
-          Username or Email
+          Email
           <input
             type="text"
             value={email}
