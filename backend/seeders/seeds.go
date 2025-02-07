@@ -5,9 +5,11 @@ func SeedAll() {
 	SeedToys()
 	SeedWishlists()
 	SeedReviews()
+	SeedToyImages()
 }
 
 func UndoSeeds() {
+	UndoToyImages()
 	UndoReviews()
 	UndoWishlistsToys()
 	UndoAllWishLists()
