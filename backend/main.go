@@ -132,7 +132,7 @@ func setupRoutes(app *fiber.App) {
 	app.Put("/api/wishlists/:id", routes.UpdateWishlist)
 	app.Delete("/api/wishlists/:id", routes.DeleteWishlist)
 
-	app.Post("/api/images", routes.UploadImageFromURL)
+	app.Post("/api/images/toys/:id", routes.CreateToyImage)
 
 	// Serve React frontend from "dist" directory
 	app.Static("/", "../frontend/dist", fiber.Static{
