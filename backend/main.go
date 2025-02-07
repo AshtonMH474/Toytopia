@@ -98,7 +98,7 @@ func handleCLICommands(cfg config.Config) {
 			database.ConnectDB(cfg)
 			if len(os.Args) > 2 && os.Args[2] == "all" {
 				log.Println("Running Migrations")
-				database.Database.Db.AutoMigrate(models.User{}, models.Toy{}, models.Wishlist{}, models.Review{})
+				database.Database.Db.AutoMigrate(models.User{}, models.Toy{}, models.Wishlist{}, models.Review{}, models.ToyImage{})
 			}
 			os.Exit(0)
 		}
@@ -131,6 +131,8 @@ func setupRoutes(app *fiber.App) {
 	app.Delete("/api/wishlists/:wishlistId/toys/:toyId", routes.RemoveToy)
 	app.Put("/api/wishlists/:id", routes.UpdateWishlist)
 	app.Delete("/api/wishlists/:id", routes.DeleteWishlist)
+
+	app.Post("/api/images/toys/:id", routes.CreateToyImage)
 
 	// Serve React frontend from "dist" directory
 	app.Static("/", "../frontend/dist", fiber.Static{
