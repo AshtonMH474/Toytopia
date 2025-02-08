@@ -31,9 +31,17 @@ type ToyImageSerial struct {
 	ImgUrl     string          `json:"img_url"`
 	Toy        ToySerialNoUser `json:"toy"`
 }
+type NoToy struct {
+	ID         uint   `json:"id"`
+	PrimaryImg bool   `json:"primary_img"`
+	ImgUrl     string `json:"img_url"`
+}
 
 func CreateResImage(image models.ToyImage, toy ToySerialNoUser) ToyImageSerial {
 	return ToyImageSerial{ID: image.ID, PrimaryImg: image.PrimaryImg, ImgUrl: image.ImgUrl, Toy: toy}
+}
+func CreateNoToyImage(image models.ToyImage) NoToy {
+	return NoToy{ID: image.ID, PrimaryImg: image.PrimaryImg, ImgUrl: image.ImgUrl}
 }
 func FindImagesByToyId(id int, images *[]models.ToyImage) error {
 	query := database.Database.Db.Model(&models.ToyImage{})
