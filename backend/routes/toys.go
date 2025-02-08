@@ -296,6 +296,15 @@ func DeleteToy(c *fiber.Ctx) error {
 	if toy.UserId != int(tokenUserID) || toy.UserId == 0 {
 		return c.Status(401).JSON(fiber.Map{"message": "Unathorzied"})
 	}
+	var images []models.ToyImage
+	if err := FindImagesByToyId(int(toy.ID), &images); err != nil {
+		return c.Status(400).JSON(err.Error())
+	}
+	for _, image := range images {
+		if err := database.Database.Db.Delete(&image).Error; err != nil {
+			return c.Status(404).JSON(err.Error())
+		}
+	}
 
 	if err := database.Database.Db.Delete(&toy).Error; err != nil {
 		return c.Status(404).JSON(err.Error())
