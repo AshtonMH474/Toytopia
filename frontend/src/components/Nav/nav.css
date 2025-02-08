@@ -3,13 +3,14 @@
 }
 .sidebar{
     background-color:#f0f0f0;
-    position: absolute;
+    position: fixed;
     top: 0;
     left: 0;
     padding: 2rem 1rem;
     width: 15rem;
     height: 100vh;
     transition: 0.5s all;
+    z-index: 20;
 }
 .dinoLogo{
     height: 70px;
