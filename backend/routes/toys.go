@@ -10,7 +10,6 @@ import (
 )
 
 type ToySerial struct {
-	// not model Toy, see this as serialzer
 	ID          uint       `json:"id"`
 	ReleaseDate time.Time  `json:"release_date"`
 	Price       float64    `json:"price"`
@@ -19,6 +18,7 @@ type ToySerial struct {
 	Count       int        `json:"count"`
 	Available   bool       `json:"available"`
 	User        UserSerial `json:"user"`
+	Images      []NoToy    `json:"images"`
 }
 type ToySerialNoUser struct {
 	// not model Toy, see this as serialzer
@@ -31,8 +31,8 @@ type ToySerialNoUser struct {
 	Available   bool      `json:"available"`
 }
 
-func CreateResToy(toy models.Toy, user UserSerial) ToySerial {
-	return ToySerial{ID: toy.ID, ReleaseDate: toy.ReleaseDate, Price: toy.Price, ProductType: toy.ProductType, Theme: toy.Theme, Count: toy.Count, Available: toy.Available, User: user}
+func CreateResToyImages(toy models.Toy, user UserSerial, images []NoToy) ToySerial {
+	return ToySerial{ID: toy.ID, ReleaseDate: toy.ReleaseDate, Price: toy.Price, ProductType: toy.ProductType, Theme: toy.Theme, Count: toy.Count, Available: toy.Available, User: user, Images: images}
 }
 
 func NoUserResToy(toy models.Toy) ToySerialNoUser {
@@ -83,9 +83,28 @@ func SearchToys(c *fiber.Ctx) error {
 	if err := query.Find(&toys).Error; err != nil {
 		return c.Status(500).JSON(fiber.Map{"error": "Error fetching toys", "message": err.Error()})
 	}
+	var newToys []ToySerial
+	for _, toy := range toys {
+		var resImages []NoToy
+		var images []models.ToyImage
+		if err := FindImagesByToyId(int(toy.ID), &images); err != nil {
+			return c.Status(400).JSON(err.Error())
+		}
+		for _, image := range images {
+			resImage := CreateNoToyImage(image)
+			resImages = append(resImages, resImage)
+		}
+		var user models.User
+		if err := findUser(int(toy.UserId), &user); err != nil {
+			return c.Status(400).JSON(err.Error())
+		}
+		resUser := CreateResUser(user)
+		resToy := CreateResToyImages(toy, resUser, resImages)
+		newToys = append(newToys, resToy)
+	}
 
 	// Return the results as a JSON response
-	return c.Status(200).JSON(toys)
+	return c.Status(200).JSON(newToys)
 }
 func CreateToy(c *fiber.Ctx) error {
 	// seeing if token
@@ -135,8 +154,9 @@ func CreateToy(c *fiber.Ctx) error {
 	toy.UserId = int(user.ID)
 
 	database.Database.Db.Create(&toy)
+	var images []NoToy
 	resUser := CreateResUser(user)
-	resToy := CreateResToy(toy, resUser)
+	resToy := CreateResToyImages(toy, resUser, images)
 	return c.Status(201).JSON(resToy)
 }
 
@@ -219,8 +239,18 @@ func UpdateToy(c *fiber.Ctx) error {
 	}
 
 	database.Database.Db.Save(&toy)
+	var resImages []NoToy
+	var images []models.ToyImage
+	if err := FindImagesByToyId(int(toy.ID), &images); err != nil {
+		return c.Status(400).JSON(err.Error())
+	}
+	for _, image := range images {
+		resImage := CreateNoToyImage(image)
+		resImages = append(resImages, resImage)
+	}
+
 	resUser := CreateResUser(user)
-	resToy := CreateResToy(toy, resUser)
+	resToy := CreateResToyImages(toy, resUser, resImages)
 
 	return c.Status(200).JSON(resToy)
 
@@ -265,6 +295,15 @@ func DeleteToy(c *fiber.Ctx) error {
 
 	if toy.UserId != int(tokenUserID) || toy.UserId == 0 {
 		return c.Status(401).JSON(fiber.Map{"message": "Unathorzied"})
+	}
+	var images []models.ToyImage
+	if err := FindImagesByToyId(int(toy.ID), &images); err != nil {
+		return c.Status(400).JSON(err.Error())
+	}
+	for _, image := range images {
+		if err := database.Database.Db.Delete(&image).Error; err != nil {
+			return c.Status(404).JSON(err.Error())
+		}
 	}
 
 	if err := database.Database.Db.Delete(&toy).Error; err != nil {
