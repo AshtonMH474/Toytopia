@@ -10,17 +10,6 @@ import (
 )
 
 type ToySerial struct {
-	// not model Toy, see this as serialzer
-	ID          uint       `json:"id"`
-	ReleaseDate time.Time  `json:"release_date"`
-	Price       float64    `json:"price"`
-	ProductType string     `json:"product_type"`
-	Theme       string     `json:"theme"`
-	Count       int        `json:"count"`
-	Available   bool       `json:"available"`
-	User        UserSerial `json:"user"`
-}
-type ToySerialImages struct {
 	ID          uint       `json:"id"`
 	ReleaseDate time.Time  `json:"release_date"`
 	Price       float64    `json:"price"`
@@ -42,11 +31,8 @@ type ToySerialNoUser struct {
 	Available   bool      `json:"available"`
 }
 
-func CreateResToy(toy models.Toy, user UserSerial) ToySerial {
-	return ToySerial{ID: toy.ID, ReleaseDate: toy.ReleaseDate, Price: toy.Price, ProductType: toy.ProductType, Theme: toy.Theme, Count: toy.Count, Available: toy.Available, User: user}
-}
-func CreateResToyImages(toy models.Toy, user UserSerial, images []NoToy) ToySerialImages {
-	return ToySerialImages{ID: toy.ID, ReleaseDate: toy.ReleaseDate, Price: toy.Price, ProductType: toy.ProductType, Theme: toy.Theme, Count: toy.Count, Available: toy.Available, User: user, Images: images}
+func CreateResToyImages(toy models.Toy, user UserSerial, images []NoToy) ToySerial {
+	return ToySerial{ID: toy.ID, ReleaseDate: toy.ReleaseDate, Price: toy.Price, ProductType: toy.ProductType, Theme: toy.Theme, Count: toy.Count, Available: toy.Available, User: user, Images: images}
 }
 
 func NoUserResToy(toy models.Toy) ToySerialNoUser {
@@ -97,7 +83,7 @@ func SearchToys(c *fiber.Ctx) error {
 	if err := query.Find(&toys).Error; err != nil {
 		return c.Status(500).JSON(fiber.Map{"error": "Error fetching toys", "message": err.Error()})
 	}
-	var newToys []ToySerialImages
+	var newToys []ToySerial
 	for _, toy := range toys {
 		var resImages []NoToy
 		var images []models.ToyImage
@@ -108,7 +94,11 @@ func SearchToys(c *fiber.Ctx) error {
 			resImage := CreateNoToyImage(image)
 			resImages = append(resImages, resImage)
 		}
-		resUser := CreateResUser(toy.User)
+		var user models.User
+		if err := findUser(int(toy.UserId), &user); err != nil {
+			return c.Status(400).JSON(err.Error())
+		}
+		resUser := CreateResUser(user)
 		resToy := CreateResToyImages(toy, resUser, resImages)
 		newToys = append(newToys, resToy)
 	}
@@ -164,8 +154,9 @@ func CreateToy(c *fiber.Ctx) error {
 	toy.UserId = int(user.ID)
 
 	database.Database.Db.Create(&toy)
+	var images []NoToy
 	resUser := CreateResUser(user)
-	resToy := CreateResToy(toy, resUser)
+	resToy := CreateResToyImages(toy, resUser, images)
 	return c.Status(201).JSON(resToy)
 }
 
@@ -248,8 +239,18 @@ func UpdateToy(c *fiber.Ctx) error {
 	}
 
 	database.Database.Db.Save(&toy)
+	var resImages []NoToy
+	var images []models.ToyImage
+	if err := FindImagesByToyId(int(toy.ID), &images); err != nil {
+		return c.Status(400).JSON(err.Error())
+	}
+	for _, image := range images {
+		resImage := CreateNoToyImage(image)
+		resImages = append(resImages, resImage)
+	}
+
 	resUser := CreateResUser(user)
-	resToy := CreateResToy(toy, resUser)
+	resToy := CreateResToyImages(toy, resUser, resImages)
 
 	return c.Status(200).JSON(resToy)
 
