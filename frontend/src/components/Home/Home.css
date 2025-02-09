@@ -2,41 +2,45 @@ body {
     display: flex;
     justify-content: center;  /* Centers the .home div horizontally */
     align-items: center;      /* Centers the .home div vertically */
-    min-height: 100vh;        /* Full viewport height */
+    min-height: 80vh;        /* Full viewport height */
     margin: 0;                /* Remove default body margin */
 }
 
-.home {
+.homeStart {
     display: flex;
-
+    flex-direction: column;
     width: 1200px;
-    height: 1000px;
-
-    box-sizing: border-box;  /* Ensure padding and border are included in width/height */
+    height: auto;
+    box-sizing: border-box;
+    margin-top: 20px;
 }
 
 .home.images {
     display: flex;
     justify-content: space-between; /* Creates space between the images */
     width: 100%;
-    padding: 20px;
+    padding: 20px;            /* Padding around the images */
+    margin-bottom: 20px;      /* Add spacing between the images and the featured section */
 }
 
-.home.images .image1 {
+.home.images .image1, .home.images .image2 {
     height: 400px;
-    width: 60%;
-    background-image: url('../../../images/kids_black_white.jpg'); /* Set background image */
-    background-size: cover;
-    background-position: center; /* Centers the background image */
     border-radius: 24px;
     position: relative;
 }
 
+.home.images .image1 {
+    width: 60%;
+    background-image: url('../../../images/kids_black_white.jpg');
+    background-size: cover;
+    background-position: center;
+}
+
 .home.images .image2 {
-    height: 400px;
-    width: 400px;
-    object-fit: cover;
-    border-radius: 10px;
+    width: 35%;
+    background-image: url('../../../images/girl_with_toys.webp');
+    background-size: cover;
+    background-position: center;
 }
 
 .text-overlay {
@@ -46,41 +50,41 @@ body {
     align-items: center;
     gap: 5px;
     position: absolute;
-    top: 75%;  /* Center text vertically */
-    left: 50%;  /* Center text horizontally */
-    transform: translate(-50%, -50%);  /* Adjust text position */
-    color: white;  /* Text color */
+    top: 75%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
     font-size: 24px;
     font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);  /* Optional shadow to make text more visible */
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Adjust text-shadow for visibility */
 }
-.home.images .image1 .text-overlay .seeall{
+
+.home.images .image1 .text-overlay .seeall, .home.images .image2 .text-overlay .seeall {
     width: 112.406px;
     height: 48px;
-    border-radius: 24px; /* Rounded corners */
+    border-radius: 24px;
     font-size: 16px;
-    background-color: #FF5A5F; /* Button background */
-    color: white; /* Text color */
-    display: flex; /* Use flexbox for center alignment */
-    justify-content: center; /* Horizontally center text */
-    align-items: center; /* Vertically center text */
-    text-transform: uppercase; /* Capitalize button text */
-    font-weight: 600; /* Bold font */
-    padding: 10px 20px; /* Add padding for more button space */
-    border: none; /* Remove default border */
-    cursor: pointer; /* Change cursor to pointer to indicate it's clickable */
-    transition: all 0.3s ease-in-out; /* Smooth transition for hover effects */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    background-color: #FF5A5F;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-transform: uppercase;
+    font-weight: 600;
+    padding: 10px 20px;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
-.home.images .image1 .text-overlay .seeall:hover {
-    background-color: #444444; /* Darker background color on hover */
-    transform: translateY(-3px); /* Slight lift effect on hover */
-    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2); /* Increased shadow on hover */
+.home.images .image1 .text-overlay .seeall:hover,
+.home.images .image2 .text-overlay .seeall:hover {
+    background-color: #444444;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.2);
 }
 
-.home.images .image1 .text-overlay .seeall:active {
-    background-color: #333333; /* Even darker background when clicked */
-    transform: translateY(1px); /* Slight dip effect when clicked */
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Reduced shadow on active */
+.featured {
+    margin-top: 0;         /* No need for padding-top anymore */
+
 }

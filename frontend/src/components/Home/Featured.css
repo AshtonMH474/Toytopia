@@ -1,0 +1,25 @@
+.info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+.featured .info h1{
+    color: rgb(33, 36, 39);
+    font-weight: 600;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    left: 50px;
+}
+
+.featured .info .link{
+    justify-self: flex-end;
+    width: 200px;
+    padding-bottom: 10px;
+    color: #FF5A5F;
+    cursor: pointer;
+    font-size: 18px ;
+    font-weight: 600;
+    text-decoration-color: #FF5A5F;
+}
