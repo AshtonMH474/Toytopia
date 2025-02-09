@@ -19,6 +19,7 @@ type ToySerial struct {
 	Available   bool       `json:"available"`
 	User        UserSerial `json:"user"`
 	Images      []NoToy    `json:"images"`
+	Company     string     `json:"company"`
 }
 type ToySerialNoUser struct {
 	// not model Toy, see this as serialzer
@@ -29,14 +30,15 @@ type ToySerialNoUser struct {
 	Theme       string    `json:"theme"`
 	Count       int       `json:"count"`
 	Available   bool      `json:"available"`
+	Company     string    `json:"company"`
 }
 
 func CreateResToyImages(toy models.Toy, user UserSerial, images []NoToy) ToySerial {
-	return ToySerial{ID: toy.ID, ReleaseDate: toy.ReleaseDate, Price: toy.Price, ProductType: toy.ProductType, Theme: toy.Theme, Count: toy.Count, Available: toy.Available, User: user, Images: images}
+	return ToySerial{ID: toy.ID, ReleaseDate: toy.ReleaseDate, Price: toy.Price, ProductType: toy.ProductType, Theme: toy.Theme, Count: toy.Count, Available: toy.Available, Company: toy.Company, User: user, Images: images}
 }
 
 func NoUserResToy(toy models.Toy) ToySerialNoUser {
-	return ToySerialNoUser{ID: toy.ID, ReleaseDate: toy.ReleaseDate, Price: toy.Price, ProductType: toy.ProductType, Theme: toy.Theme, Count: toy.Count, Available: toy.Available}
+	return ToySerialNoUser{ID: toy.ID, ReleaseDate: toy.ReleaseDate, Price: toy.Price, ProductType: toy.ProductType, Theme: toy.Theme, Count: toy.Count, Available: toy.Available, Company: toy.Company}
 }
 
 func SearchToys(c *fiber.Ctx) error {
