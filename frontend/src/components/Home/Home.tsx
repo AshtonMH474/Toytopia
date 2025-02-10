@@ -7,6 +7,7 @@ import { RootState } from '../../store/store';
 import { User } from '../../store/session';
 import { useNavigate } from 'react-router-dom';
 import Featured from './Featured';
+import HighlyRated from './HighlyRated';
 
 function Home() {
     const sessionUser = useSelector<RootState, User | null>((state) => state.user.user);
@@ -14,30 +15,31 @@ function Home() {
     const nav = useNavigate()
 
     const signup = () => {
-        setModalContent(<SignupFormModal />);
+        if (!sessionUser) setModalContent(<SignupFormModal />);
+        else nav('/wishlists')
     }
 
     return (
         <>
         <div className='homeStart'>
             <div className='home images'>
-                <div className='image1'>
+                <div onClick={() => nav('/toys')} className='image1'>
                     <div className='text-overlay'>
                        Shop Your Favorite Toys
-                       <button onClick={() => nav('/toys')} className='seeall'>See All</button>
+                       <button className='seeall'>See All</button>
                     </div>
                 </div>
-                <div className='image2'>
+                <div onClick={signup} className='image2'>
                 {!sessionUser && (
                     <div className='text-overlay overlay2'>
                     Join Us Now
-                     <button onClick={signup} className='seeall'>Sign Up</button>
+                     <button  className='seeall'>Sign Up</button>
                 </div>
                 )}
                 {sessionUser && (
                     <div className='text-overlay overlay2'>
                     View My Wishlist
-                     <button onClick={() => nav('/wishlists')} className='seeall'>View</button>
+                     <button  className='seeall'>View</button>
                 </div>
                 )}
 
@@ -45,6 +47,10 @@ function Home() {
 
             </div>
 
+        </div>
+
+        <div className='highlyrated'>
+            <HighlyRated />
         </div>
         <div className='featured'>
             <Featured/>
