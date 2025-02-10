@@ -13,6 +13,7 @@ body {
     height: auto;
     box-sizing: border-box;
     margin-top: 20px;
+    /* border: 1px solid red; */
 }
 
 .home.images {
@@ -86,5 +87,5 @@ body {
 
 .featured {
     margin-top: 0;         /* No need for padding-top anymore */
-
+    /* border: 1px red solid; */
 }

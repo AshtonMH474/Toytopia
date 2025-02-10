@@ -10,16 +10,39 @@
     text-align: center;
     width: 100%;
     position: relative;
-    left: 50px;
+    left: 100px;
 }
 
 .featured .info .link{
     justify-self: flex-end;
     width: 200px;
-    padding-bottom: 10px;
+    /* padding-bottom: 5px; */
     color: #FF5A5F;
     cursor: pointer;
     font-size: 18px ;
     font-weight: 600;
+    position: relative;
+    left: 30px;
     text-decoration-color: #FF5A5F;
+    z-index: 2;
+}
+.brands{
+    display: flex;
+    gap: 20px;
+    position: relative;
+    left: 20px;
+}
+
+.brands .images{
+    height: 185px;
+    width: 185px;
+    border-radius: 24px;
+    object-fit: cover;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.brands .images:hover{
+    cursor: pointer;
+    transform: scale(1.05);
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.3);
 }
