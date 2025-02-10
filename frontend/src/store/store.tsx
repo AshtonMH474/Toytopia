@@ -4,12 +4,14 @@ import {thunk, ThunkDispatch} from "redux-thunk";
 
 import { Dispatch } from "react";
 import sessionReducer from "./session";
+import toysReducer from "./toys";
 
 
 // Define reducers
 const reducers = combineReducers({
   // your reducers here
-  user:sessionReducer
+  user:sessionReducer,
+  toys:toysReducer
 });
 
 // Initial state
