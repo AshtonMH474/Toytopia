@@ -62,7 +62,6 @@ func SeedToys() {
 		{ReleaseDate: time.Date(2017, time.November, 11, 0, 0, 0, 0, time.UTC), Price: 45, ProductType: "TMNT Ultimate Shellraiser", Theme: "Teenage Mutant Ninja Turtles", Count: 9, Available: true, UserId: 2, Company: "Playmates Toys", Rating: 4.7},
 		{ReleaseDate: time.Date(2019, time.May, 13, 0, 0, 0, 0, time.UTC), Price: 50, ProductType: "TMNT Sewer Playset", Theme: "Teenage Mutant Ninja Turtles", Count: 8, Available: true, UserId: 3, Company: "Playmates Toys", Rating: 4.9},
 		{ReleaseDate: time.Date(2020, time.January, 8, 0, 0, 0, 0, time.UTC), Price: 30, ProductType: "TMNT Bebop and Rocksteady", Theme: "Teenage Mutant Ninja Turtles", Count: 15, Available: true, UserId: 1, Company: "Playmates Toys", Rating: 4.6},
-		{ReleaseDate: time.Date(1984, time.May, 12, 0, 0, 0, 0, time.UTC), Price: 1000, ProductType: "Optimus Prime G1 Original", Theme: "Transformers", Count: 2, Available: true, UserId: 1, Company: "Hasbro", Rating: 5.0},
 		{ReleaseDate: time.Date(1995, time.September, 20, 0, 0, 0, 0, time.UTC), Price: 150, ProductType: "Power Rangers Red Ranger Action Figure", Theme: "Power Rangers", Count: 10, Available: true, UserId: 2, Company: "Hasbro", Rating: 4.5},
 		{ReleaseDate: time.Date(2002, time.November, 3, 0, 0, 0, 0, time.UTC), Price: 40, ProductType: "GI Joe Snake Eyes Action Figure", Theme: "GI Joe", Count: 15, Available: true, UserId: 1, Company: "Hasbro", Rating: 4.7},
 		{ReleaseDate: time.Date(2006, time.March, 18, 0, 0, 0, 0, time.UTC), Price: 60, ProductType: "Nerf N-Strike Maverick", Theme: "Nerf", Count: 20, Available: true, UserId: 2, Company: "Hasbro", Rating: 4.6},
@@ -74,9 +73,6 @@ func SeedToys() {
 		{ReleaseDate: time.Date(2019, time.March, 21, 0, 0, 0, 0, time.UTC), Price: 45, ProductType: "Nerf Rival Nemesis", Theme: "Nerf", Count: 8, Available: true, UserId: 3, Company: "Hasbro", Rating: 4.7},
 		{ReleaseDate: time.Date(2020, time.June, 1, 0, 0, 0, 0, time.UTC), Price: 80, ProductType: "Monopoly: The Office Edition", Theme: "Monopoly", Count: 50, Available: true, UserId: 1, Company: "Hasbro", Rating: 4.4},
 		{ReleaseDate: time.Date(2021, time.January, 10, 0, 0, 0, 0, time.UTC), Price: 22, ProductType: "GI Joe Classified Snake Eyes", Theme: "GI Joe", Count: 25, Available: true, UserId: 2, Company: "Hasbro", Rating: 4.6},
-		{ReleaseDate: time.Date(2022, time.May, 14, 0, 0, 0, 0, time.UTC), Price: 30, ProductType: "Monopoly: The Office Edition", Theme: "Monopoly", Count: 50, Available: true, UserId: 3, Company: "Hasbro", Rating: 4.4},
-		{ReleaseDate: time.Date(2023, time.August, 5, 0, 0, 0, 0, time.UTC), Price: 60, ProductType: "Nerf Fortnite AR-L", Theme: "Nerf", Count: 12, Available: true, UserId: 1, Company: "Hasbro", Rating: 4.8},
-		{ReleaseDate: time.Date(2024, time.December, 10, 0, 0, 0, 0, time.UTC), Price: 50, ProductType: "GI Joe Classified Storm Shadow", Theme: "GI Joe", Count: 18, Available: true, UserId: 2, Company: "Hasbro", Rating: 4.7},
 	}
 
 	for _, toy := range toys {
