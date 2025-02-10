@@ -11,17 +11,17 @@ export interface ToyImage{
 }
 export interface Toy {
     id: number;
-    ReleaseDate: Date
-    Price: number
-    Company: string
-    ProductType: string
-    Theme:string
-    Count: number
-    Available: boolean
-    Rating: number
-    UserId: number
-    User: User
-    Images:ToyImage[]
+    release_date: Date
+    price: number
+    company: string
+    product_type: string
+    theme:string
+    count: number
+    available: boolean
+    rating: number
+    user_id: number
+    user: User
+    images:ToyImage[]
 }
 
 
