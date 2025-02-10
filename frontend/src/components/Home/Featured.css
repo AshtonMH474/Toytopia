@@ -16,7 +16,6 @@
 .featured .info .link{
     justify-self: flex-end;
     width: 200px;
-    /* padding-bottom: 5px; */
     color: #FF5A5F;
     cursor: pointer;
     font-size: 18px ;
