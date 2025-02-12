@@ -18,3 +18,33 @@
     text-decoration-color: #FF5A5F;
     z-index: 2;
 }
+
+.highlyrated .toys{
+    display: flex;
+    gap: 20px;
+    position: relative;
+    left: 20px;
+}
+
+.highlyrated .toys .currToy{
+    /* display: flex; */
+    width: 285px;
+    height: 490.5px;
+    border: 1px solid red;
+    border-radius: 20px;
+}
+
+.highlyrated .toys .currToy .img{
+    /* justify-content: center; */
+    /* align-items: center; */
+    height: 50%; /* Set the height of the container */
+    width: 100%; /* Set the width of the container */
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    overflow: hidden;
+    /* object-fit: cover; */
+}
+
+.highlyrated .toys .currToy .card {
+    border-top: 1px solid black ;
+}

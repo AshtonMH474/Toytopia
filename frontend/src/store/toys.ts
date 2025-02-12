@@ -6,8 +6,8 @@ const SET_TOYS = 'toys/SET_TOYS'
 
 export interface ToyImage{
     id:number;
-    ImgUrl:string
-    PrimaryImage:boolean
+    img_url:string
+    primary_img:boolean
 }
 export interface Toy {
     id: number;
