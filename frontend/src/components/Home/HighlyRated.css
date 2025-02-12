@@ -26,25 +26,53 @@
     left: 20px;
 }
 
-.highlyrated .toys .currToy{
-    /* display: flex; */
+.highlyrated .toys .currToy {
     width: 285px;
     height: 490.5px;
-    border: 1px solid red;
     border-radius: 20px;
+    overflow: hidden;
+    background-color: #fff; /* White background for the card */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add subtle shadow */
+    transition: transform 0.3s ease, box-shadow 0.3s ease; /* Smooth transition on hover */
+    cursor: pointer;
 }
 
-.highlyrated .toys .currToy .img{
-    /* justify-content: center; */
-    /* align-items: center; */
-    height: 50%; /* Set the height of the container */
-    width: 100%; /* Set the width of the container */
+/* Hover effect to scale the card and add a stronger shadow */
+.highlyrated .toys .currToy:hover {
+    transform: translateY(-5px); /* Slightly raise the card */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow */
+}
+
+/* Image styles to fit properly inside the card */
+.highlyrated .toys .currToy .img {
+    width: 100%;
+    height: 60%; /* Occupy top 60% of the card */
+     /* Ensure image covers the area without distortion */
     border-top-left-radius: 20px;
     border-top-right-radius: 20px;
     overflow: hidden;
-    /* object-fit: cover; */
+    object-fit: cover;
 }
 
+/* Card info section (below the image) */
 .highlyrated .toys .currToy .card {
-    border-top: 1px solid black ;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 40%; /* Occupy the remaining 40% of the card */
+}
+
+/* Title and Info styling */
+.highlyrated .toys .currToy .card h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: #333; /* Dark color for the title */
+}
+
+.highlyrated .toys .currToy .card p {
+    font-size: 14px;
+    color: #777; /* Lighter color for additional info */
+    margin: 0;
 }

@@ -3,6 +3,8 @@
     justify-content: space-between;
     align-items: center;
     width: 100%;
+    position: relative;
+    top: 0px;
 }
 .featured .info h1{
     color: rgb(33, 36, 39);
@@ -31,6 +33,7 @@
     position: relative;
     left: 20px;
 }
+
 
 .brands .images{
     height: 185px;
