@@ -45,7 +45,7 @@ func CreateNoToyImage(image models.ToyImage) NoToy {
 }
 func FindImagesByToyId(id int, images *[]models.ToyImage) error {
 	query := database.Database.Db.Model(&models.ToyImage{})
-	query = query.Where("toy_id == ?", id)
+	query = query.Where("toy_id = ?", id)
 	if err := query.Find(&images).Error; err != nil {
 		return errors.New("images do not exist")
 	}
