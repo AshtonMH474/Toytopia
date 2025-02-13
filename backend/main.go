@@ -59,12 +59,6 @@ func setupGlobalMiddleware(app *fiber.App, isProduction bool) {
 	// CORS middleware for development
 	if !isProduction {
 		app.Use(cors.New())
-	} else {
-		app.Use(cors.New(cors.Config{
-			AllowOrigins: "https://toytopia.onrender.com/", // Replace with your frontend's URL
-			AllowMethods: "GET,POST,PUT,DELETE",
-			AllowHeaders: "Content-Type,Authorization",
-		}))
 	}
 
 	// Logger middleware for debugging

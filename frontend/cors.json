@@ -1,0 +1,15 @@
+{
+    "CORSRules": [
+        {
+            "AllowedOrigins": [
+                "https://toytopia.onrender.com"
+            ],
+            "AllowedMethods": [
+                "GET"
+            ],
+            "AllowedHeaders": [
+                "*"
+            ]
+        }
+    ]
+}
