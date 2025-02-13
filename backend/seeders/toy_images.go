@@ -22,7 +22,7 @@ func SeedToyImages() {
 		{ImgUrl: "https://i.ytimg.com/vi/GmOfwtQzXcY/maxresdefault.jpg", PrimaryImg: true, ToyId: 11},
 		{ImgUrl: "https://i.ebayimg.com/images/g/CbIAAOSwk9lifrye/s-l640.jpg", PrimaryImg: true, ToyId: 12},
 		{ImgUrl: "https://m.media-amazon.com/images/I/91NWGxqXBML.jpg", PrimaryImg: true, ToyId: 13},
-		{ImgUrl: "https://static.wikia.nocookie.net/lego/images/2/22/6271_Imperial_Flagship.jpg/revision/latest/thumbnail/width/360/height/360?cb=20090817092702", PrimaryImg: true, ToyId: 14},
+		{ImgUrl: "https://thumbs.coleka.com/media/item/201707/01/lego-pirates-caribbean-clipper-6274.webp", PrimaryImg: true, ToyId: 14},
 		{ImgUrl: "https://www.lego.com/cdn/cs/set/assets/blt6c7f809caec392ac/75212_alt1.jpg", PrimaryImg: true, ToyId: 15},
 		{ImgUrl: "https://m.media-amazon.com/images/I/91Ed0nNU6yL.jpg", PrimaryImg: true, ToyId: 16},
 		{ImgUrl: "https://m.media-amazon.com/images/I/71XKTVkQbkL.jpg", PrimaryImg: true, ToyId: 17},

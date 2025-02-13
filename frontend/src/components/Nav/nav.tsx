@@ -84,18 +84,18 @@ function Navigation({isLoaded}) {
                             <div className='title'>Toys</div>
                         </Link>
                     </li>
-                    <li>
+                    {sessionUser && (<li>
                         <Link to='/wishlists' className='link'>
                             <MdDashboardCustomize className='logo'/>
                             <div className='title'>Wishlist</div>
                         </Link>
-                    </li>
-                    <li>
+                    </li>)}
+                    {sessionUser && (<li>
                         <Link to='/reviews' className='link'>
                             <MdReviews className='logo'/>
                             <div className='title'>Reviews</div>
                         </Link>
-                    </li>
+                    </li>)}
                     {sessionUser && (<li>
                         <Link onClick={logout} to = '/' className='link'>
                             <IoIosExit className='logo logout'/>
