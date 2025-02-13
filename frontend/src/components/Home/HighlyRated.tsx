@@ -46,7 +46,7 @@ function HighlyRated() {
                     </Link>
                 </div>
                 <div className="toys">
-                    <button onClick={prevToys}><HiArrowSmallLeft /></button>
+
                     {ratedToys && ratedToys.length ? (
                         ratedToys.slice(currIndex, currIndex + 4).map((toy) => (
                             <div key={toy.id} className="currToy">
@@ -66,6 +66,10 @@ function HighlyRated() {
                                                 ${toy.price.toFixed(2)}
                                         </div>
                                     </div>
+                                    <div className="bottomInfo">
+                                        <div className="name">{toy.product_type}</div>
+                                        <button className="button">Add to Cart</button>
+                                    </div>
                                 </div>
 
 
@@ -74,9 +78,14 @@ function HighlyRated() {
                     ) : (
                         <p>No highly rated toys found.</p>
                     )}
+
+                </div>
+
+            </div>
+            <div className="arrows">
+                    <button onClick={prevToys}><HiArrowSmallLeft /></button>
                     <button onClick={nextToys}><HiArrowSmallRight/></button>
                 </div>
-            </div>
         </>
     );
 }
