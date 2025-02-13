@@ -15,7 +15,8 @@ function HighlyRated() {
 
     useEffect(() => {
         async function filterToys() {
-            await dispatch(getToys()); // Ensure we have toys from the state
+            // Ensure we have toys from the state
+            await dispatch(getToys());
         }
 
         filterToys();
@@ -83,8 +84,8 @@ function HighlyRated() {
 
             </div>
             <div className="arrows">
-                    <button onClick={prevToys}><HiArrowSmallLeft /></button>
-                    <button onClick={nextToys}><HiArrowSmallRight/></button>
+                    <button className={`arrowButton left ${currIndex == 0 ? 'disabled' : 'notDisabled'}`} disabled={currIndex == 0} onClick={prevToys}><HiArrowSmallLeft className="arrow"/></button>
+                    <button disabled={currIndex + 4 > ratedToys.length}  className={`arrowButton right ${currIndex + 4 > ratedToys.length? "disabled": "notDisabled"}`} onClick={nextToys}><HiArrowSmallRight className="arrow"/></button>
                 </div>
         </>
     );

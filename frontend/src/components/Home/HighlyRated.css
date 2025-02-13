@@ -134,3 +134,47 @@
 .currToy .card .bottomInfo .button:hover{
     background-color: #444444;
 }
+
+
+.highlyrated .arrows{
+    display: flex;
+    justify-content: space-between;
+}
+.highlyrated .arrows .arrowButton{
+    border-radius: 50%;
+    height: 50px;
+    width: 50px;
+    border: none;
+    position: relative;
+    bottom: 300px;
+    /* cursor: pointer; */
+    z-index: 10;
+}
+.highlyrated .arrows .arrowButton.right{
+    left: 50px;
+}
+.highlyrated .arrows .arrowButton.left{
+    right: 20px;
+}
+.highlyrated .arrows .arrow{
+    font-size: 25px;
+}
+
+.highlyrated .arrows .arrowButton.left.notDisabled:hover{
+    color: #FF5A5F;
+    cursor: pointer;
+}
+.highlyrated .arrows .arrowButton.right.notDisabled:hover{
+    color: #FF5A5F;
+    cursor: pointer;
+}
+
+.highlyrated .arrows .arrowButton.right.disabled{
+    background-color: rgb(239, 239, 239);
+    cursor: not-allowed;
+}
+
+.highlyrated .arrows .arrowButton.left.disabled{
+    background-color: rgb(239, 239, 239);
+    cursor: not-allowed;
+}
