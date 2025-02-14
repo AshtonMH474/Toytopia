@@ -71,9 +71,13 @@ func setupGlobalMiddleware(app *fiber.App, isProduction bool) {
 	// Security middleware
 	app.Use(helmet.New())
 
-	// Set Cross-Origin Resource Policy header
 	app.Use(func(c *fiber.Ctx) error {
+		// Set Cross-Origin Resource Policy header
 		c.Set("Cross-Origin-Resource-Policy", "cross-origin")
+
+		// Set Cross-Origin Embedder Policy header
+		c.Set("Cross-Origin-Embedder-Policy", "require-corp") // or "unsafe-none" for less restrictive policy
+
 		return c.Next()
 	})
 
