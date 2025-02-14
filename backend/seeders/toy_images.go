@@ -18,7 +18,7 @@ func SeedToyImages() {
 		{ImgUrl: "https://toytopiaimages.s3.us-east-2.amazonaws.com/images_toys/buzz.jpg", PrimaryImg: true, ToyId: 2},
 		{ImgUrl: "https://toytopiaimages.s3.us-east-2.amazonaws.com/images_toys/optimus.png", PrimaryImg: true, ToyId: 1},
 		{ImgUrl: "https://cdn11.bigcommerce.com/s-cy4lua1xoh/images/stencil/1280x1280/products/33464/427451/82b6d5d8-8de5-5398-b619-ec94fd9ae919__05565.1719337509.jpg?c=1?imbypass=on", PrimaryImg: true, ToyId: 9},
-		{ImgUrl: "https://static.wikia.nocookie.net/barbie/images/3/3f/Fashionistas_Sassy_Doll_R9882_%2801%29.jpg/revision/latest?cb=20210509105558", PrimaryImg: true, ToyId: 10},
+		{ImgUrl: "https://m.media-amazon.com/images/I/61BGBmRozTL.jpg", PrimaryImg: true, ToyId: 10},
 		{ImgUrl: "https://i.ytimg.com/vi/GmOfwtQzXcY/maxresdefault.jpg", PrimaryImg: true, ToyId: 11},
 		{ImgUrl: "https://i.ebayimg.com/images/g/CbIAAOSwk9lifrye/s-l640.jpg", PrimaryImg: true, ToyId: 12},
 		{ImgUrl: "https://m.media-amazon.com/images/I/91NWGxqXBML.jpg", PrimaryImg: true, ToyId: 13},
