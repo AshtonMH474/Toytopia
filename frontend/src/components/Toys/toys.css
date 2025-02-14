@@ -1,32 +1,15 @@
-.highlyrated .info h1{
-    color: rgb(33, 36, 39);
-    font-weight: 600;
-    text-align: center;
-    width: 100%;
-    position: relative;
-    left: 100px;
-}
-.highlyrated .info .link{
-    justify-self: flex-end;
-    width: 200px;
-    color: #FF5A5F;
-    cursor: pointer;
-    font-size: 18px ;
-    font-weight: 600;
-    position: relative;
-    left: 100px;
-    text-decoration-color: #FF5A5F;
-    z-index: 2;
-}
+.toys{
 
-.highlyrated .toys{
-    display: flex;
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
+    grid-template-rows: auto;
     gap: 20px;
     position: relative;
-    left: 20px;
+    right: 50px;
+    padding: 70px 0;
 }
 
-.highlyrated .toys .currToy {
+.toys .currToy{
     width: 285px;
     height: 550px;
     border-radius: 20px;
@@ -37,13 +20,12 @@
     cursor: pointer;
 }
 
-/* Hover effect to scale the card and add a stronger shadow */
-.highlyrated .toys .currToy:hover {
+.toys .currToy:hover {
     transform: translateY(-5px); /* Slightly raise the card */
     box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2); /* Stronger shadow */
 }
 
-.highlyrated .toys .currToy .divImg{
+.currToy .divImg{
     position: relative;
     height: 60%;
     display: flex;
@@ -54,16 +36,14 @@
     border-top-right-radius: 20px;
 }
 
-/* Image styles to fit properly inside the card */
-.highlyrated .toys .currToy .img {
+.toys .currToy .img {
     padding: 10px;
     overflow: hidden;
     object-fit: cover;
     border-radius: 20px;
 }
 
-/* Card info section (below the image) */
-.highlyrated .toys .currToy .card {
+.toys .currToy .card {
     padding: 15px;
     display: flex;
     flex-direction: column;
@@ -71,15 +51,14 @@
     height: 10%; /* Occupy the remaining 40% of the card */
 }
 
-/* Title and Info styling */
-.highlyrated .toys .currToy .card h2 {
+.toys .currToy .card h2 {
     font-size: 18px;
     font-weight: 600;
     margin-bottom: 10px;
     color: #333; /* Dark color for the title */
 }
 
-.highlyrated .toys .currToy .card p {
+.toys .currToy .card p {
     font-size: 14px;
     color: #777; /* Lighter color for additional info */
     margin: 0;
@@ -96,6 +75,7 @@
     top: 2px;
     color: #FF5A5F;
 }
+
 .currToy .card .Info .rating .gray{
     position: relative;
     top: 2px;
@@ -133,48 +113,4 @@
 
 .currToy .card .bottomInfo .button:hover{
     background-color: #444444;
-}
-
-
-.highlyrated .arrows{
-    display: flex;
-    justify-content: space-between;
-}
-.highlyrated .arrows .arrowButton{
-    border-radius: 50%;
-    height: 50px;
-    width: 50px;
-    border: none;
-    position: relative;
-    bottom: 300px;
-    /* cursor: pointer; */
-    z-index: 10;
-}
-.highlyrated .arrows .arrowButton.right{
-    left: 50px;
-}
-.highlyrated .arrows .arrowButton.left{
-    right: 20px;
-}
-.highlyrated .arrows .arrow{
-    font-size: 25px;
-}
-
-.highlyrated .arrows .arrowButton.left.notDisabled:hover{
-    color: #FF5A5F;
-    cursor: pointer;
-}
-.highlyrated .arrows .arrowButton.right.notDisabled:hover{
-    color: #FF5A5F;
-    cursor: pointer;
-}
-
-.highlyrated .arrows .arrowButton.right.disabled{
-    background-color: rgb(239, 239, 239);
-    cursor: not-allowed;
-}
-
-.highlyrated .arrows .arrowButton.left.disabled{
-    background-color: rgb(239, 239, 239);
-    cursor: not-allowed;
 }
