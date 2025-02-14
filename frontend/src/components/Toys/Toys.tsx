@@ -1,13 +1,19 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store"
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { getToys } from "../../store/toys";
 import { IoStarSharp } from "react-icons/io5";
+import { FaArrowDown } from "react-icons/fa";
 import './toys.css'
+import Brands from "./Brands";
 
 function Toys(){
     const dispatch = useDispatch<AppDispatch>();
     const toys = useSelector((state: RootState) => state.toys.toys);
+
+
+    const [theme,setTheme] = useState<string>("")
+    const [visableBrands, setBrands] = useState<boolean>(false)
 
     useEffect(() => {
         async function grabToys(){
@@ -18,6 +24,20 @@ function Toys(){
     },[dispatch])
     return (
         <>
+        <div className="filterToys">
+            <div className="companys">
+                <h2 onClick={() => setBrands(!visableBrands)}>Brands <FaArrowDown/></h2>
+                <Brands visable={visableBrands}/>
+            </div>
+            <div>
+            <h2 onClick={() => setBrands(!visableBrands)}>Theme <FaArrowDown/></h2>
+            <label>
+            Theme
+            <input type="search" onChange={(e) => setTheme(e.target.value)} value={theme}/>
+            </label>
+            </div>
+
+        </div>
         <div className="toys">
             {toys && toys.length ? (
                 toys.map((toy) => (
