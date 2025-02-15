@@ -45,6 +45,17 @@ export const getToys = () => async (dispatch: React.Dispatch<ToyActions>) => {
     return res
 }
 
+export const filterToys = (theme) => async (dispatch:React.Dispatch<ToyActions>) => {
+    let url = `/api/toys?&`;
+    if(theme && theme.length) url = url + `theme=${theme}&`
+
+
+    const res = await authFetch(url)
+    const data = await res.json()
+    await dispatch(setToys(data))
+    return res
+}
+
 export interface ToyState {
     toys:Toy[];
 }
