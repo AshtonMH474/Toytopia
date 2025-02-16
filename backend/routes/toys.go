@@ -52,6 +52,7 @@ func SearchToys(c *fiber.Ctx) error {
 	theme := c.Query("theme")
 	minPrice := c.Query("min_price")
 	maxPrice := c.Query("max_price")
+	company := c.Query("company")
 
 	// Apply filters based on the parameters
 	if productType != "" {
@@ -65,6 +66,9 @@ func SearchToys(c *fiber.Ctx) error {
 	}
 	if maxPrice != "" {
 		query = query.Where("price <= ?", maxPrice)
+	}
+	if company != "" {
+		query = query.Where("company LIKE ?", "%"+company+"%")
 	}
 
 	// Filter for availability (true or false)

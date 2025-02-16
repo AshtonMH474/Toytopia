@@ -51,7 +51,12 @@ export const filterToys = (filters) => async (dispatch:React.Dispatch<ToyActions
     if(filters.minPrice)url = url + `min_price=${filters.minPrice}&`
     url = url + `max_price=${filters.maxPrice}&`
 
-
+    for(let key in filters.brands){
+        if(filters.brands[key] == true){
+            url = url + `company=${key}&`
+        }
+    }
+    console.log(url)
     const res = await authFetch(url)
     const data = await res.json()
     await dispatch(setToys(data))

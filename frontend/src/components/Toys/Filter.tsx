@@ -15,27 +15,33 @@ function FilteredToys(){
         const [theme,setTheme] = useState<string>("")
         const [minPrice,setMinPrice] = useState<number>(0)
         const [maxPrice, setMaxPrice] = useState<number>(Infinity)
+        const [brands, setObjBrands] = useState({
+            disney:false,
+            hasbro:false,
+            playmatesToys:false,
+            lego:false,
+            mattel:false,
+            hotwheels:false
+        })
+
 
         useEffect(() => {
             async function filterStuff() {
             // filtering themes
-            const filters = {}
-            if(theme.length){
-                filters['theme'] = theme
-            }
-            else {
-                filters['theme'] = null
+            let filters = {
+                theme: theme.length? theme : null,
+                minPrice:minPrice,
+                maxPrice:maxPrice,
+                brands:brands
             }
 
-            filters['minPrice'] = minPrice
-            filters['maxPrice'] = maxPrice
 
             await dispatch(filterToys(filters))
 
             }
 
         filterStuff()
-    },[dispatch,theme,minPrice,maxPrice])
+    },[dispatch,theme,minPrice,maxPrice,brands])
 
     const handleMax = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -53,7 +59,7 @@ function FilteredToys(){
         <>
         <div className="companys">
                         <h2 onClick={() => setBrands(!visableBrands)}>Brands <FaArrowDown/></h2>
-                        <Brands visable={visableBrands}/>
+                        <Brands setBrands={setObjBrands} visable={visableBrands} />
                     </div>
                     <div className="themes">
                         <h2 onClick={() => setThemes(!visableThemes)}>Theme <FaArrowDown/></h2>
