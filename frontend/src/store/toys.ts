@@ -45,9 +45,11 @@ export const getToys = () => async (dispatch: React.Dispatch<ToyActions>) => {
     return res
 }
 
-export const filterToys = (theme) => async (dispatch:React.Dispatch<ToyActions>) => {
+export const filterToys = (filters) => async (dispatch:React.Dispatch<ToyActions>) => {
     let url = `/api/toys?&`;
-    if(theme && theme.length) url = url + `theme=${theme}&`
+    if(filters.theme && filters.theme.length) url = url + `theme=${filters.theme}&`
+    if(filters.minPrice)url = url + `min_price=${filters.minPrice}&`
+    url = url + `max_price=${filters.maxPrice}&`
 
 
     const res = await authFetch(url)

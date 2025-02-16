@@ -19,28 +19,35 @@ function FilteredToys(){
         useEffect(() => {
             async function filterStuff() {
             // filtering themes
+            const filters = {}
             if(theme.length){
-                await dispatch(filterToys(theme))
+                filters['theme'] = theme
             }
             else {
-                await dispatch(filterToys(null))
+                filters['theme'] = null
             }
 
+            filters['minPrice'] = minPrice
+            filters['maxPrice'] = maxPrice
+
+            await dispatch(filterToys(filters))
 
             }
 
         filterStuff()
-    },[dispatch,theme])
+    },[dispatch,theme,minPrice,maxPrice])
 
     const handleMax = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         // Parse the string input into a number, if possible
-        setMaxPrice(value ? parseFloat(value) : 0);
+
+        setMaxPrice(parseFloat(value));
       };
       const handleMin = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
         // Parse the string input into a number, if possible
-        setMinPrice(value ? parseFloat(value) : 0);
+        if(!value)setMinPrice(0)
+        setMinPrice(parseFloat(value));
       };
     return (
         <>
