@@ -4,6 +4,8 @@ import { useDispatch } from "react-redux";
 import Brands from "./Brands";
 import { filterToys } from "../../store/toys";
 import { FaArrowDown } from "react-icons/fa";
+import { FaArrowRight } from "react-icons/fa";
+import './Filters.css'
 
 
 function FilteredToys(){
@@ -11,8 +13,11 @@ function FilteredToys(){
         const [visableThemes, setThemes] = useState<boolean>(false)
         const [visablePrices, setPrices] = useState<boolean>(false)
         const [visableBrands, setBrands] = useState<boolean>(false)
+        const [visableProducts, setProducts] = useState<boolean>(false)
+
 
         const [theme,setTheme] = useState<string>("")
+        const [product,setProduct] = useState<string>("")
         const [minPrice,setMinPrice] = useState<number>(0)
         const [maxPrice, setMaxPrice] = useState<number>(Infinity)
         const [brands, setObjBrands] = useState({
@@ -30,18 +35,18 @@ function FilteredToys(){
             // filtering themes
             let filters = {
                 theme: theme.length? theme : null,
+                product: product.length? product : null,
                 minPrice:minPrice,
                 maxPrice:maxPrice,
                 brands:brands
             }
-
 
             await dispatch(filterToys(filters))
 
             }
 
         filterStuff()
-    },[dispatch,theme,minPrice,maxPrice,brands])
+    },[dispatch,theme,minPrice,maxPrice,brands,product])
 
     const handleMax = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
@@ -56,34 +61,52 @@ function FilteredToys(){
         setMinPrice(parseFloat(value));
       };
     return (
-        <>
-        <div className="companys">
-                        <h2 onClick={() => setBrands(!visableBrands)}>Brands <FaArrowDown/></h2>
+        <div className="filters-container">
+                    <div className="products">
+                        {!visableProducts && (<h2 onClick={() => setProducts(!visableProducts)}>Toy Name<FaArrowRight className="arrow"/></h2>)}
+                        {visableProducts && (<h2 onClick={() => setProducts(!visableProducts)}>Toy Name<FaArrowDown className="arrow"/></h2>)}
+                        <div className={`optionsThemes ${visableProducts? "" : "hideOptions"}`}>
+                            <label>
+                            Name
+                            </label>
+                            <input type="search" onChange={(e) => setProduct(e.target.value)} value={product}/>
+
+                        </div>
+                    </div>
+                    <div className="companys">
+                    {!visableBrands && (<h2 onClick={() => setBrands(!visableBrands)}>Brands<FaArrowRight className="arrow"/></h2>)}
+                    {visableBrands && (<h2 onClick={() => setBrands(!visableBrands)}>Brands <FaArrowDown className="arrow"/></h2>)}
                         <Brands setBrands={setObjBrands} visable={visableBrands} />
                     </div>
                     <div className="themes">
-                        <h2 onClick={() => setThemes(!visableThemes)}>Theme <FaArrowDown/></h2>
+                    {!visableThemes && (<h2 onClick={() => setThemes(!visableThemes)}>Themes<FaArrowRight className="arrow"/></h2>)}
+                    {visableThemes && (<h2 onClick={() => setThemes(!visableThemes)}>Themes<FaArrowDown className="arrow"/></h2>)}
                         <div className={`optionsThemes ${visableThemes? "" : "hideOptions"}`}>
                             <label>
                             Theme
-                            <input type="search" onChange={(e) => setTheme(e.target.value)} value={theme}/>
                             </label>
+                            <input type="search" onChange={(e) => setTheme(e.target.value)} value={theme}/>
+
                         </div>
                     </div>
                     <div className="prices">
-                        <h2 onClick={() => setPrices(!visablePrices)}>Prices <FaArrowDown/></h2>
+                        {!visablePrices && (<h2 onClick={() => setPrices(!visablePrices)}>Prices<FaArrowRight className="arrow"/></h2>)}
+                        {visablePrices && (<h2 onClick={() => setPrices(!visablePrices)}>Prices<FaArrowDown className="arrow"/></h2>)}
+
                         <div className={`optionsPrice ${visablePrices? "" : "hideOptions"}`}>
                             <label>
                             Minumum Price
-                            <input type="number" onChange={handleMin} min="0" value={minPrice}/>
                             </label>
+                            <input type="number" onChange={handleMin} min="0" value={minPrice}/>
+
                             <label>
                             Max Price
-                            <input type="number" onChange={handleMax} min="0" value={maxPrice}/>
                             </label>
+                            <input type="number" onChange={handleMax} min="0" value={maxPrice}/>
+
                         </div>
                     </div>
-        </>
+        </div>
     )
 }
 

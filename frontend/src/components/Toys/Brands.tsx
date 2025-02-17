@@ -1,4 +1,4 @@
-import './brands.css'
+
 
 function Brands({visable,setBrands}){
     async function handleCheckBox(e){

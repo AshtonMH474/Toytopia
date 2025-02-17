@@ -38,25 +38,21 @@ export const setToys = (toys:Toy[]): SetToyAction => ({
 })
 
 
-export const getToys = () => async (dispatch: React.Dispatch<ToyActions>) => {
-    const res = await authFetch(`/api/toys`)
-    const data = await res.json()
-    await dispatch(setToys(data))
-    return res
-}
 
-export const filterToys = (filters) => async (dispatch:React.Dispatch<ToyActions>) => {
+export const filterToys = (filters?:any) => async (dispatch:React.Dispatch<ToyActions>) => {
     let url = `/api/toys?&`;
-    if(filters.theme && filters.theme.length) url = url + `theme=${filters.theme}&`
-    if(filters.minPrice)url = url + `min_price=${filters.minPrice}&`
-    url = url + `max_price=${filters.maxPrice}&company=`
+    if(filters){
+        if(filters.theme && filters.theme.length) url = url + `theme=${filters.theme}&`
+        if(filters.product && filters.product.length) url = url + `product_type=${filters.product}&`
+        if(filters.minPrice)url = url + `min_price=${filters.minPrice}&`
+        url = url + `max_price=${filters.maxPrice}&company=`
 
-    for(let key in filters.brands){
-        if(filters.brands[key] == true){
-            url = url + `${key},`
+        for(let key in filters.brands){
+            if(filters.brands[key] == true){
+                url = url + `${key},`
+            }
         }
-    }
-    console.log(url)
+}
     const res = await authFetch(url)
     const data = await res.json()
     await dispatch(setToys(data))

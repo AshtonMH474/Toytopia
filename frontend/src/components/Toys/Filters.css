@@ -1,0 +1,128 @@
+.hideOptions{
+    visibility: hidden;
+}
+
+
+.filters-container h2 {
+    font-size: 1.2rem;
+    margin-bottom: 10px;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+
+  }
+
+  .filters-container .hideOptions {
+    display: none;
+  }
+
+  /* Section Headers */
+  .filters-container .products h2,
+  .filters-container .companys h2,
+  .filters-container .themes h2,
+  .filters-container .prices h2 {
+    font-size: 1.4rem;
+    font-weight: bold;
+    color: #333;
+  }
+
+  .filters-container .optionsThemes,
+  .filters-container .optionsPrice,
+  .filters-container .options {
+    margin-top: 10px;
+    padding-left: 20px;
+    font-size: 1rem;
+    color: #555;
+  }
+
+  .filters-container .optionsPrice input {
+    width: 80%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #fff;
+  }
+  .filters-container .optionsThemes input{
+    width: 85%;
+    padding: 8px;
+    margin: 5px 0;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 1rem;
+    background-color: #fff;
+  }
+
+  .filters-container .optionsThemes label,
+  .filters-container .optionsPrice label {
+    display: block;
+    margin-bottom: 5px;
+  }
+
+  .filters-container .companys label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 10px 0;
+  }
+
+  .filters-container .companys input[type="checkbox"] {
+    margin-right: 10px;
+  }
+
+  .filters-container .companys label:hover {
+    background-color: #e8e8e8;
+  }
+
+  .filters-container .optionsPrice {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .filters-container .products,
+  .filters-container .companys,
+  .filters-container .themes,
+  .filters-container .prices {
+    margin-bottom: 20px;
+  }
+  .products label,
+  .themes label{
+    position: relative;
+    top: 10px;
+    left: 3px;
+  }
+  .prices label{
+    position: relative;
+    top: 10px;
+    left: 3px;
+  }
+
+
+  .filters-container .FaArrowDown,
+  .filters-container .FaArrowRight {
+    font-size: 1.2rem;
+  }
+
+  .products h2{
+    position: relative;
+    right: 22px;
+  }
+  .products h2 .arrow{
+    position: relative;
+    left: 20px;
+  }
+
+  .themes h2{
+    position: relative;
+    right: 22px;
+  }
+  .themes h2 .arrow{
+    position: relative;
+    left: 25px;
+  }
+  .optionsThemes{
+    position: relative;
+    left: 5px;
+  }
