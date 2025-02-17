@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux";
 import { AppDispatch, RootState } from "../../store/store"
 import { useEffect } from "react";
-import { getToys } from "../../store/toys";
+import { filterToys } from "../../store/toys";
 import { IoStarSharp } from "react-icons/io5";
 
 import './toys.css'
@@ -15,7 +15,7 @@ function Toys(){
 
     useEffect(() => {
         async function grabToys(){
-            await dispatch(getToys())
+            await dispatch(filterToys())
 
         }
         grabToys()
@@ -26,7 +26,7 @@ function Toys(){
 
     return (
         <>
-        <div className="filterToys">
+        <div className="filters-containers">
             <FilteredToys/>
         </div>
         <div className="toys">

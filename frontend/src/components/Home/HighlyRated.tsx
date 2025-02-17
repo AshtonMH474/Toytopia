@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from "react-redux"
 import { AppDispatch, RootState } from "../../store/store"
 import { useEffect , useState} from "react"
-import { getToys } from "../../store/toys"
+import { filterToys } from "../../store/toys"
 import { HiArrowSmallRight } from "react-icons/hi2";
 import { HiArrowSmallLeft } from "react-icons/hi2";
 import { Link } from "react-router-dom"
@@ -14,12 +14,12 @@ function HighlyRated() {
     const [currIndex,setIndex] = useState<number>(0)
 
     useEffect(() => {
-        async function filterToys() {
+        async function filterAllToys() {
             // Ensure we have toys from the state
-            await dispatch(getToys());
+            await dispatch(filterToys());
         }
 
-        filterToys();
+        filterAllToys();
     }, [dispatch]);
 
     // Filter the toys after the toys are loaded into the state

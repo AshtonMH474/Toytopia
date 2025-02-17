@@ -2,6 +2,7 @@ package routes
 
 import (
 	"errors"
+	"strings"
 	"time"
 
 	database "github.com/AshtonMH474/Toytopia/db"
@@ -52,6 +53,7 @@ func SearchToys(c *fiber.Ctx) error {
 	theme := c.Query("theme")
 	minPrice := c.Query("min_price")
 	maxPrice := c.Query("max_price")
+	companyParam := c.Query("company")
 
 	// Apply filters based on the parameters
 	if productType != "" {
@@ -65,6 +67,17 @@ func SearchToys(c *fiber.Ctx) error {
 	}
 	if maxPrice != "" {
 		query = query.Where("price <= ?", maxPrice)
+	}
+	if companyParam != "" {
+		companies := strings.Split(companyParam, ",")
+
+		// Trim whitespace from each company name
+		for i, company := range companies {
+			companies[i] = strings.TrimSpace(company)
+		}
+
+		// Apply the filter with the "IN" SQL operator for multiple companies
+		query = query.Where("company IN (?)", companies)
 	}
 
 	// Filter for availability (true or false)
