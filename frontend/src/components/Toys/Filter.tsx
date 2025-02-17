@@ -16,11 +16,11 @@ function FilteredToys(){
         const [minPrice,setMinPrice] = useState<number>(0)
         const [maxPrice, setMaxPrice] = useState<number>(Infinity)
         const [brands, setObjBrands] = useState({
-            disney:false,
-            hasbro:false,
-            playmatesToys:false,
-            lego:false,
-            mattel:false,
+            Disney:false,
+            Hasbro:false,
+            PlaymatesToys:false,
+            LEGO:false,
+            Mattel:false,
             hotwheels:false
         })
 

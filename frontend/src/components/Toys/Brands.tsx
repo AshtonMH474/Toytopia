@@ -12,19 +12,19 @@ function Brands({visable,setBrands}){
         <div className={`options ${visable? "": "hideOptions"}`}>
             <label>
                     Disney
-                    <input type="checkbox" name="disney" value="newsletter" onChange={handleCheckBox}/>
+                    <input type="checkbox" name="Disney" value="newsletter" onChange={handleCheckBox}/>
                     </label>
                     <label>
                     Barbie
-                    <input type="checkbox" name="mattel" value="newsletter" onChange={handleCheckBox}/>
+                    <input type="checkbox" name="Mattel" value="newsletter" onChange={handleCheckBox}/>
                     </label>
                     <label>
                     Lego
-                    <input type="checkbox" name="lego" value="newsletter" onChange={handleCheckBox}/>
+                    <input type="checkbox" name="LEGO" value="newsletter" onChange={handleCheckBox}/>
                     </label>
                     <label>
                     Hasbro
-                    <input type="checkbox" name="hasbro" value="newsletter" onChange={handleCheckBox}/>
+                    <input type="checkbox" name="Hasbro" value="newsletter" onChange={handleCheckBox}/>
                     </label>
                     <label>
                     Hotwheels
@@ -32,7 +32,7 @@ function Brands({visable,setBrands}){
                     </label>
                     <label>
                     Playmates Toys
-                    <input type="checkbox" name="playmatesToys" value="newsletter" onChange={handleCheckBox}/>
+                    <input type="checkbox" name="PlaymatesToys" value="newsletter" onChange={handleCheckBox}/>
                     </label>
         </div>
     )

@@ -49,11 +49,11 @@ export const filterToys = (filters) => async (dispatch:React.Dispatch<ToyActions
     let url = `/api/toys?&`;
     if(filters.theme && filters.theme.length) url = url + `theme=${filters.theme}&`
     if(filters.minPrice)url = url + `min_price=${filters.minPrice}&`
-    url = url + `max_price=${filters.maxPrice}&`
+    url = url + `max_price=${filters.maxPrice}&company=`
 
     for(let key in filters.brands){
         if(filters.brands[key] == true){
-            url = url + `company=${key}&`
+            url = url + `${key},`
         }
     }
     console.log(url)
