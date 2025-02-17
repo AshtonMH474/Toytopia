@@ -1,17 +1,29 @@
 .hideOptions{
     visibility: hidden;
 }
+.filters-container{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 1000px;
 
+}
 
 .filters-container h2 {
     font-size: 1.2rem;
     margin-bottom: 10px;
     cursor: pointer;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    border: 1px solid red;
+    width: 85%;
+    position: relative;
+    left: 20px;
     align-items: center;
 
   }
+
 
   .filters-container .hideOptions {
     display: none;
@@ -109,19 +121,13 @@
     position: relative;
     right: 22px;
   }
-  .products h2 .arrow{
-    position: relative;
-    left: 20px;
-  }
+
 
   .themes h2{
     position: relative;
     right: 22px;
   }
-  .themes h2 .arrow{
-    position: relative;
-    left: 25px;
-  }
+
   .optionsThemes{
     position: relative;
     left: 5px;

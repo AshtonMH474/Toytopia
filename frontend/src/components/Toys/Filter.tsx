@@ -63,8 +63,9 @@ function FilteredToys(){
     return (
         <div className="filters-container">
                     <div className="products">
-                        {!visableProducts && (<h2 onClick={() => setProducts(!visableProducts)}>Toy Name<FaArrowRight className="arrow"/></h2>)}
-                        {visableProducts && (<h2 onClick={() => setProducts(!visableProducts)}>Toy Name<FaArrowDown className="arrow"/></h2>)}
+
+                        <div className="title">{!visableProducts && (<h2 onClick={() => setProducts(!visableProducts)}>Toy Name<FaArrowRight className="arrow"/></h2>)}</div>
+                        <div className="title">{visableProducts && (<h2 onClick={() => setProducts(!visableProducts)}>Toy Name<FaArrowDown className="arrow"/></h2>)}</div>
                         <div className={`optionsThemes ${visableProducts? "" : "hideOptions"}`}>
                             <label>
                             Name
@@ -106,6 +107,7 @@ function FilteredToys(){
 
                         </div>
                     </div>
+                    <button>Close Menu</button>
         </div>
     )
 }
