@@ -53,6 +53,7 @@ export const filterToys = (filters?:any) => async (dispatch:React.Dispatch<ToyAc
             }
         }
 }
+    console.log(url)
     const res = await authFetch(url)
     const data = await res.json()
     await dispatch(setToys(data))

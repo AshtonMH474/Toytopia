@@ -10,6 +10,7 @@ import { useModal } from "../../Context/Modal";
 
 
 function FilteredToys(){
+        const {brands,setObjBrands} = useModal()
         const dispatch = useDispatch<AppDispatch>();
         const [visableThemes, setThemes] = useState<boolean>(true)
         const [visablePrices, setPrices] = useState<boolean>(true)
@@ -21,15 +22,6 @@ function FilteredToys(){
         const [product,setProduct] = useState<string>("")
         const [minPrice,setMinPrice] = useState<number>(0)
         const [maxPrice, setMaxPrice] = useState<number>(Infinity)
-        const [brands, setObjBrands] = useState({
-            Disney:false,
-            Hasbro:false,
-            PlaymatesToys:false,
-            LEGO:false,
-            Mattel:false,
-            hotwheels:false
-        })
-
 
         useEffect(() => {
             async function filterStuff() {
