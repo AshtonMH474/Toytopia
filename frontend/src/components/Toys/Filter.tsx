@@ -10,36 +10,32 @@ import { useModal } from "../../Context/Modal";
 
 
 function FilteredToys(){
+        const {brands,setObjBrands,minRating,setMinRating,maxRating,setMaxRating} = useModal()
         const dispatch = useDispatch<AppDispatch>();
         const [visableThemes, setThemes] = useState<boolean>(true)
         const [visablePrices, setPrices] = useState<boolean>(true)
         const [visableBrands, setBrands] = useState<boolean>(true)
         const [visableProducts, setProducts] = useState<boolean>(true)
+        const [visableRatings, setVisableRatings] = useState<boolean>(true)
 
         const {closeModal} = useModal()
         const [theme,setTheme] = useState<string>("")
         const [product,setProduct] = useState<string>("")
         const [minPrice,setMinPrice] = useState<number>(0)
         const [maxPrice, setMaxPrice] = useState<number>(Infinity)
-        const [brands, setObjBrands] = useState({
-            Disney:false,
-            Hasbro:false,
-            PlaymatesToys:false,
-            LEGO:false,
-            Mattel:false,
-            hotwheels:false
-        })
-
 
         useEffect(() => {
             async function filterStuff() {
             // filtering themes
+            console.log(minRating,typeof minRating)
             let filters = {
                 theme: theme.length? theme : null,
                 product: product.length? product : null,
                 minPrice:minPrice,
                 maxPrice:maxPrice,
-                brands:brands
+                brands:brands,
+                maxRating:maxRating,
+                minRating:minRating
             }
 
             await dispatch(filterToys(filters))
@@ -57,9 +53,23 @@ function FilteredToys(){
       };
       const handleMin = (e: React.ChangeEvent<HTMLInputElement>) => {
         const value = e.target.value;
+
         // Parse the string input into a number, if possible
         if(!value)setMinPrice(0)
         setMinPrice(parseFloat(value));
+      };
+
+      const handleMaxRating = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+        // Parse the string input into a number, if possible
+
+        setMaxRating(parseFloat(value));
+      };
+      const handleMinRating = (e: React.ChangeEvent<HTMLInputElement>) => {
+        const value = e.target.value;
+
+        // Parse the string input into a number, if possible
+        setMinRating(parseFloat(value));
       };
     return (
         <div className="filters-container">
@@ -105,6 +115,23 @@ function FilteredToys(){
                             Max Price
                             </label>
                             <input type="number" onChange={handleMax} min="0" value={maxPrice}/>
+
+                        </div>
+                    </div>
+                    <div className={`prices rating ${visablePrices == false? 'ratingUp': ''}`}>
+                        {!visableRatings && (<h2 onClick={() => setVisableRatings(!visableRatings)}>Ratings<FaArrowRight className="arrow"/></h2>)}
+                        {visableRatings && (<h2 onClick={() => setVisableRatings(!visableRatings)}>Ratings<FaArrowDown className="arrow"/></h2>)}
+
+                        <div className={`optionsPrice ${visableRatings? "" : "hideOptions"}`}>
+                            <label>
+                            Minumum Rating
+                            </label>
+                            <input type="number" onChange={handleMinRating} min="0" max={'5'} value={minRating}/>
+
+                            <label>
+                            Max Rating
+                            </label>
+                            <input type="number" onChange={handleMaxRating} min="0" max={'5'} value={maxRating}/>
 
                         </div>
                     </div>

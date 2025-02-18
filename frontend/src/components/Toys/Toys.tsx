@@ -13,19 +13,38 @@ import FilteredToys from "./Filter";
 function Toys(){
     const dispatch = useDispatch<AppDispatch>();
     const toys = useSelector((state: RootState) => state.toys.toys);
-    const {setModalContent} = useModal()
+    const {setModalContent,setObjBrands,brands,setMaxRating,setMinRating} = useModal()
 
 
     useEffect(() => {
+
         async function grabToys(){
-            await dispatch(filterToys())
+            let filters = {
+                theme:null,
+                product: null,
+                minPrice: 0,
+                maxPrice:Infinity,
+                brands:brands
+            }
+            await dispatch(filterToys(filters))
 
         }
         grabToys()
     },[dispatch])
 
-    const openFilter = () => {
-        setModalContent(<FilteredToys/>)
+    const openFilter = async () => {
+        await setObjBrands({Disney: false,
+            Hasbro: false,
+            PlaymatesToys: false,
+            LEGO: false,
+            Mattel: false,
+            Hotwheels: false,})
+
+        await setMaxRating(5)
+        await setMinRating(0)
+
+        await dispatch(filterToys())
+        await setModalContent(<FilteredToys/>)
     }
 
 

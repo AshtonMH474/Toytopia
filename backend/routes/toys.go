@@ -55,6 +55,8 @@ func SearchToys(c *fiber.Ctx) error {
 	minPrice := c.Query("min_price")
 	maxPrice := c.Query("max_price")
 	companyParam := c.Query("company")
+	maxRating := c.Query("max_rating")
+	minRating := c.Query("min_rating")
 
 	// Apply filters based on the parameters
 	enviroment := os.Getenv("NODE_ENV")
@@ -82,6 +84,12 @@ func SearchToys(c *fiber.Ctx) error {
 	}
 	if maxPrice != "" {
 		query = query.Where("price <= ?", maxPrice)
+	}
+	if minRating != "" {
+		query = query.Where("rating >= ?", minRating)
+	}
+	if maxRating != "" {
+		query = query.Where("rating <= ?", maxRating)
 	}
 	if companyParam != "" {
 		companies := strings.Split(companyParam, ",")

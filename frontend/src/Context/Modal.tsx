@@ -2,6 +2,15 @@ import { useRef, useState, useContext, createContext, ReactNode } from 'react';
 import ReactDOM from 'react-dom';
 import './Modal.css';
 
+interface Brands {
+  Disney: boolean;
+  Hasbro: boolean;
+  PlaymatesToys: boolean;
+  LEGO: boolean;
+  Mattel: boolean;
+  Hotwheels: boolean;
+}
+
 // Define the modal context type
 interface ModalContextType {
   modalRef: React.RefObject<HTMLDivElement>;
@@ -9,7 +18,15 @@ interface ModalContextType {
   setModalContent: (content: ReactNode | null) => void;
   setOnModalClose: (callback: (() => void) | null) => void;
   closeModal: () => void;
+  brands: Brands; // Use the specific Brands type
+  setObjBrands: React.Dispatch<React.SetStateAction<Brands>>; // Add setObjBrands to the context
+  minRating : number
+  maxRating: number
+  setMinRating: React.Dispatch<React.SetStateAction<number>>;
+  setMaxRating: React.Dispatch<React.SetStateAction<number>>;
 }
+
+
 
 // Create the context with an initial undefined state
 const ModalContext = createContext<ModalContextType | undefined>(undefined);
@@ -23,6 +40,18 @@ export function ModalProvider({ children }: ModalProviderProps) {
   const [modalContent, setModalContent] = useState<ReactNode | null>(null);
   const [onModalClose, setOnModalClose] = useState<(() => void) | null>(null);
 
+  // Define the brands state
+  const [brands, setObjBrands] = useState({
+    Disney: false,
+    Hasbro: false,
+    PlaymatesToys: false,
+    LEGO: false,
+    Mattel: false,
+    Hotwheels: false,
+  });
+  const [minRating,setMinRating] = useState(0)
+  const [maxRating,setMaxRating] = useState(5)
+
   const closeModal = () => {
     setModalContent(null);
     if (onModalClose) {
@@ -31,12 +60,19 @@ export function ModalProvider({ children }: ModalProviderProps) {
     }
   };
 
+  // Context value including brands and setObjBrands
   const contextValue: ModalContextType = {
     modalRef,
     modalContent,
     setModalContent,
     setOnModalClose,
     closeModal,
+    brands, // Include brands in context
+    setObjBrands, // Include setObjBrands in context
+    minRating,
+    setMinRating,
+    maxRating,
+    setMaxRating
   };
 
   return (
