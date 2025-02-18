@@ -6,16 +6,17 @@ import { filterToys } from "../../store/toys";
 import { FaArrowDown } from "react-icons/fa";
 import { FaArrowRight } from "react-icons/fa";
 import './Filters.css'
+import { useModal } from "../../Context/Modal";
 
 
 function FilteredToys(){
         const dispatch = useDispatch<AppDispatch>();
-        const [visableThemes, setThemes] = useState<boolean>(false)
-        const [visablePrices, setPrices] = useState<boolean>(false)
-        const [visableBrands, setBrands] = useState<boolean>(false)
-        const [visableProducts, setProducts] = useState<boolean>(false)
+        const [visableThemes, setThemes] = useState<boolean>(true)
+        const [visablePrices, setPrices] = useState<boolean>(true)
+        const [visableBrands, setBrands] = useState<boolean>(true)
+        const [visableProducts, setProducts] = useState<boolean>(true)
 
-
+        const {closeModal} = useModal()
         const [theme,setTheme] = useState<string>("")
         const [product,setProduct] = useState<string>("")
         const [minPrice,setMinPrice] = useState<number>(0)
@@ -64,8 +65,8 @@ function FilteredToys(){
         <div className="filters-container">
                     <div className="products">
 
-                        <div className="title">{!visableProducts && (<h2 onClick={() => setProducts(!visableProducts)}>Toy Name<FaArrowRight className="arrow"/></h2>)}</div>
-                        <div className="title">{visableProducts && (<h2 onClick={() => setProducts(!visableProducts)}>Toy Name<FaArrowDown className="arrow"/></h2>)}</div>
+                        <div className="title">{!visableProducts && (<h2 onClick={() => setProducts(!visableProducts)}>Name<FaArrowRight className="arrow"/></h2>)}</div>
+                        <div className="title">{visableProducts && (<h2 onClick={() => setProducts(!visableProducts)}>Name<FaArrowDown className="arrow"/></h2>)}</div>
                         <div className={`optionsThemes ${visableProducts? "" : "hideOptions"}`}>
                             <label>
                             Name
@@ -107,7 +108,7 @@ function FilteredToys(){
 
                         </div>
                     </div>
-                    <button>Close Menu</button>
+                    <button onClick={closeModal} className={`closeFilters`}>Close Menu</button>
         </div>
     )
 }
