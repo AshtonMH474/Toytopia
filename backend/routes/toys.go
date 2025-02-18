@@ -2,6 +2,7 @@ package routes
 
 import (
 	"errors"
+	"os"
 	"strings"
 	"time"
 
@@ -56,12 +57,26 @@ func SearchToys(c *fiber.Ctx) error {
 	companyParam := c.Query("company")
 
 	// Apply filters based on the parameters
-	if productType != "" {
-		query = query.Where("product_type LIKE ?", "%"+productType+"%")
+	enviroment := os.Getenv("NODE_ENV")
+	isProduction := enviroment == "production"
+
+	if isProduction {
+		if theme != "" {
+			query = query.Where("theme ILIKE ?", "%"+theme+"%")
+
+		}
+		if productType != "" {
+			query = query.Where("product_type ILIKE ?", "%"+productType+"%")
+		}
+	} else {
+		if productType != "" {
+			query = query.Where("product_type LIKE ?", "%"+productType+"%")
+		}
+		if theme != "" {
+			query = query.Where("theme LIKE ?", "%"+theme+"%")
+		}
 	}
-	if theme != "" {
-		query = query.Where("theme LIKE ?", "%"+theme+"%")
-	}
+
 	if minPrice != "" {
 		query = query.Where("price >= ?", minPrice)
 	}

@@ -3,14 +3,17 @@ import { AppDispatch, RootState } from "../../store/store"
 import { useEffect } from "react";
 import { filterToys } from "../../store/toys";
 import { IoStarSharp } from "react-icons/io5";
-
+import { TbFilters } from "react-icons/tb";
 import './toys.css'
-
+import { useModal } from "../../Context/Modal";
 import FilteredToys from "./Filter";
+
+
 
 function Toys(){
     const dispatch = useDispatch<AppDispatch>();
     const toys = useSelector((state: RootState) => state.toys.toys);
+    const {setModalContent} = useModal()
 
 
     useEffect(() => {
@@ -21,14 +24,16 @@ function Toys(){
         grabToys()
     },[dispatch])
 
-
+    const openFilter = () => {
+        setModalContent(<FilteredToys/>)
+    }
 
 
     return (
         <>
-        <div className="filters-containers">
-            <FilteredToys/>
-        </div>
+
+            <button onClick={openFilter} className="filterButton"><TbFilters/>Filters</button>
+
         <div className="toys">
             {toys && toys.length ? (
                 toys.map((toy) => (
