@@ -20,6 +20,10 @@ interface ModalContextType {
   closeModal: () => void;
   brands: Brands; // Use the specific Brands type
   setObjBrands: React.Dispatch<React.SetStateAction<Brands>>; // Add setObjBrands to the context
+  minRating : number
+  maxRating: number
+  setMinRating: React.Dispatch<React.SetStateAction<number>>;
+  setMaxRating: React.Dispatch<React.SetStateAction<number>>;
 }
 
 
@@ -45,6 +49,8 @@ export function ModalProvider({ children }: ModalProviderProps) {
     Mattel: false,
     Hotwheels: false,
   });
+  const [minRating,setMinRating] = useState(0)
+  const [maxRating,setMaxRating] = useState(5)
 
   const closeModal = () => {
     setModalContent(null);
@@ -63,6 +69,10 @@ export function ModalProvider({ children }: ModalProviderProps) {
     closeModal,
     brands, // Include brands in context
     setObjBrands, // Include setObjBrands in context
+    minRating,
+    setMinRating,
+    maxRating,
+    setMaxRating
   };
 
   return (

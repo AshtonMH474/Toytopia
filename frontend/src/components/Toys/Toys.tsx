@@ -13,7 +13,7 @@ import FilteredToys from "./Filter";
 function Toys(){
     const dispatch = useDispatch<AppDispatch>();
     const toys = useSelector((state: RootState) => state.toys.toys);
-    const {setModalContent,setObjBrands,brands} = useModal()
+    const {setModalContent,setObjBrands,brands,setMaxRating,setMinRating} = useModal()
 
 
     useEffect(() => {
@@ -40,6 +40,8 @@ function Toys(){
             Mattel: false,
             Hotwheels: false,})
 
+        await setMaxRating(5)
+        await setMinRating(0)
 
         await dispatch(filterToys())
         await setModalContent(<FilteredToys/>)

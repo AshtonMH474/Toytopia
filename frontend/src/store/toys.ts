@@ -44,6 +44,8 @@ export const filterToys = (filters?:any) => async (dispatch:React.Dispatch<ToyAc
     if(filters){
         if(filters.theme && filters.theme.length) url = url + `theme=${filters.theme}&`
         if(filters.product && filters.product.length) url = url + `product_type=${filters.product}&`
+        if(filters.minRating)url = url + `min_rating=${filters.minRating}&`
+        if (filters.maxRating) url = url + `max_rating=${filters.maxRating}&`
         if(filters.minPrice)url = url + `min_price=${filters.minPrice}&`
         url = url + `max_price=${filters.maxPrice}&company=`
 
